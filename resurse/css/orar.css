@@ -1,0 +1,45 @@
+#orar {
+    overflow-x: auto;
+    border: 5px inset var(--culoare1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table caption {
+    caption-side: bottom;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+table th, table td {
+    border: 1px solid var(--culoare1);
+    padding: 8px;
+    text-align: center;
+}
+
+table thead th {
+    background-color: var(--culoare-text);
+}
+
+table tbody tr:nth-child(odd) td {
+    border-bottom: 1px solid var(--culoar1);
+}
+
+table tbody tr:nth-child(even) td {
+    border-bottom: 1px solid var(--culoare2);
+}
+
+table tbody tr:hover {
+    outline: 5px solid rgba(255, 255, 0, 0.7);
+    transition: outline 0.5s ease-in-out;
+}
+
+@media screen and (max-width: 600px) {
+    #orar {
+        width: 100%;
+    }
+}

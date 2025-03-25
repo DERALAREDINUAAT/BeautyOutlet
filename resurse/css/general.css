@@ -1,0 +1,373 @@
+/* p{
+    border: 2px solid blue;
+} */
+
+
+html{
+    font-size:18px;
+}
+body{
+    --spatiere-pagina:80px;
+    --culoare-background:var(--culoare4);
+    --culoare-deschisa: var(--culoare2);
+
+}
+h2{
+    font-size: 1.6rem;
+
+}
+h3{
+    font-size:  1.3rem;
+
+}
+
+
+
+
+#grid-pagina{
+    display: grid;
+    grid-template-areas: "welcome  welcome  welcome  welcome"
+                         "welcome  welcome  welcome  welcome"
+                         "anunturi anunturi    calendar calendar" 
+                         "anunturi anunturi    orar orar"
+                         "utilizatori-online date-utilizator date-utilizator server-stats"
+                         "produse produse produse produse";
+
+}
+#grid-pagina > *{
+    outline: 2px solid var(--culoare3);
+    padding: 7px;
+}
+
+#grid-pagina > figure{
+    margin: 0;
+}
+#grid-pagina img{
+    width: 100%;
+    max-width: 300px;
+}
+
+
+main{
+    padding-left: var(--spatiere-pagina);
+    padding-right: var(--spatiere-pagina);
+}
+
+
+#welcome{
+    grid-area: welcome;
+}
+#date-utilizator{
+    grid-area: date-utilizator;
+}
+#anunturi{
+    grid-area: anunturi;
+}
+#orar{
+    grid-area: orar;
+}
+ 
+#utilizatori-online{
+    grid-area: utilizatori-online;
+}
+#calendar{
+    grid-area: calendar;
+}
+#server-stats{
+    grid-area: server-stats;
+}
+#produse{
+    grid-area: produse;
+}
+
+
+figcaption{
+    text-align:center;
+}
+
+h1{
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/*.taburi-iframe>a{
+    display: block;
+    width: 100px;
+    height: 50px;
+    border: 1px solid var(--culoare-background);
+    background-color: var(--culoare-deschisa);
+    text-align: center;
+}
+
+.taburi-iframe{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.container-iframe{
+    width: 60%;
+    max-width: 500px;
+    min-width: 200px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.container-iframe>iframe{
+    width:100%;
+}*/
+
+/* #link-top{
+    position:fixed;
+    bottom:0.3em;
+    opacity:0.5;
+    left:0.3em;
+    width:3rem;
+    box-sizing: border-box;
+    height:3rem;
+    line-height:3rem;
+    text-align:center;
+    border:5px solid grey;
+      border-top-color:red;
+    border-radius:50%;
+    background: rgb(220,220,220);
+  }
+  #link-top:hover{
+    opacity:1;
+  }
+  #triunghi{
+    height:0px;
+    width:0;
+    display:inline-block;
+    border-bottom:1.5rem solid grey;
+    border-left:1rem solid transparent;
+    border-right:1rem solid transparent;
+    vertical-align: top;
+    transform: translateY(30%);
+  } */
+
+
+@media screen and (max-width:1200px) {
+    html{
+        font-size:14px;
+    }
+
+    body{
+        --spatiere-pagina:50px;
+    }    
+    
+    #grid-pagina{
+        grid-template-rows: 1fr 1fr; /* repeat(2,1fr) */
+        grid-template-areas: "welcome  welcome"
+                             "orar orar"
+                             "calendar calendar"
+                             "anunturi anunturi" 
+                             "utilizatori-online utilizatori-online"
+                             "date-utilizator date-utilizator"
+                             "server-stats server-stats"
+                             "produse produse";
+    
+    }
+
+}
+
+
+@media screen and (max-width:800px) {
+    #grid-pagina{
+        display: block;
+    }
+
+    html{
+        font-size:10px;
+    }
+
+    body{
+        --spatiere-pagina:20px;
+    }    
+    
+}
+
+:root {
+    --culoare1: #3a5d1b;
+    --culoare2: #8ebf45;
+    --culoare3: #fef5d6;
+    --culoare4: #d2b48c;
+    --culoare5: #333333;
+    --culoare-text: white;
+    --spatiere:1em;
+    --text-mare: 16px;
+    --text-mediu: 14px;
+    --text-mic: 12px;
+    background: rgb(58, 93, 27);
+        background: linear-gradient(90deg, var(--culoare1) 0%, var(--culoare2) 50%, var(--culoare4) 100%);
+}
+
+#calendar {
+    background-color: var(--culoare3);
+    padding: var(--spatiere);
+    margin: var(--spatiere) 0;
+    border-radius: 8px;
+}
+
+.calendar-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.zi-eveniment {
+    display: flex;
+    align-items: center;
+    background-color: var(--culoare-background);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.data {
+    background-color: var(--culoare2);
+    color: white;
+    padding: 15px;
+    min-width: 70px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.eveniment {
+    padding: 15px;
+    flex-grow: 1;
+}
+
+.eveniment h3 {
+    color: var(--culoare2);
+    margin-top: 0;
+}
+
+/* Responsiv */
+@media (max-width: 600px) {
+    .zi-eveniment {
+        flex-direction: column;
+    }
+    .data {
+        width: 100%;
+    }
+}
+
+/* [LISTA UTILIZATORI] */
+#utilizatori-online {
+    background-color: var(--culoare3);
+    padding: var(--spatiere);
+    margin: var(--spatiere) 0;
+    border-radius: 8px;
+    height: auto;
+}
+
+.lista-utilizatori {
+    list-style-type: none;
+    padding: 0;
+}
+
+.lista-utilizatori li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid var(--culoare-background);
+}
+
+.lista-utilizatori img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.status-online {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #2ecc71;
+    border-radius: 50%;
+    margin-left: auto;
+}
+
+/* Iconiță Font Awesome */
+#utilizatori-online h2 i {
+    color: var(--culoare2);
+    margin-right: 10px;
+}
+
+/* Zona 6 - Statistici utilizator */
+#date-utilizator {
+    background-color: var(--culoare3);
+    padding: var(--spatiere);
+    border-radius: 8px;
+    margin-bottom: var(--spatiere);
+}
+
+.placeholder-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.stat-box {
+    background-color: var(--culoare-background);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.stat-box:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
+
+.stat-box i {
+    font-size: 2rem;
+    color: var(--culoare2);
+    margin-bottom: 10px;
+}
+
+/* Zona 7 - Statistici server */
+#server-stats {
+    background-color: var(--culoare3);
+    padding: var(--spatiere);
+    border-radius: 8px;
+}
+
+.server-stat {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--culoare-background);
+}
+
+.stat-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat-value {
+    font-weight: bold;
+}
+
+.loading {
+    color: var(--culoare2);
+    font-style: italic;
+}
+
+.online {
+    color: #2ecc71;
+}
+
+/* Animatie loading */
+@keyframes blink {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+}
+
+.loading::after {
+    content: "*";
+    animation: blink 1.5s infinite;
+}
+

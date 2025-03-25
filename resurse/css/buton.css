@@ -1,0 +1,34 @@
+/* buton.css */
+#triunghi {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--culoare4) 0%, var(--culoare-text) 50%, var(--culoare4) 100%);
+    border: 5px dashed var(--culoare1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+#triunghi:hover {
+    opacity: 1;
+    transform: rotate(360deg);
+}
+
+#triunghi::after {
+    content: '\2191';
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--culoare4);
+    transition: transform 0.3s;
+}
+
+#triunghi:hover::after {
+    transform: rotate(-360deg);
+}

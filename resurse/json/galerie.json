@@ -5,13 +5,13 @@
                 "cale_imagine":"masca_faciala.png",
                 "titlu":"Masca faciala",
                 "descriere":"Masca pentru hidratarea fetei",
-                "timp":"00:00-23:59"
+                "timp":"00:01-00:06"
             },
 			{
                 "cale_imagine":"paleta.png",
                 "titlu":"Paleta",
                 "descriere":"Paleta machiaj",
-                "timp":"00:00-23:59"
+                "timp":"00:01-00:06"
             },
 			{
                 "cale_imagine":"palete.png",
@@ -29,7 +29,7 @@
                 "cale_imagine":"parfum2.png",
                 "titlu":"Parfum",
                 "descriere":"Parfum",
-                "timp":"00:00-23:59"
+                "timp":"00:01-00:06"
             },
 			{
                 "cale_imagine":"parfum3.png",
@@ -41,7 +41,7 @@
                 "cale_imagine":"rsz_1imagine_oja.png",
                 "titlu":"Oja",
                 "descriere":"Oja",
-                "timp":"00:00-23:59"
+                "timp":"09:00-20:00"
             },
 			{
                 "cale_imagine":"rsz_1imagine_parfum.png",
@@ -53,7 +53,7 @@
                 "cale_imagine":"rsz_1imagine_rimmel.png",
                 "titlu":"Rimmel",
                 "descriere":"Rimmel",
-                "timp":"00:00-23:59"
+                "timp":"09:00-20:00"
             },
             {
                 "cale_imagine":"Femeie_machiata.jpg",
@@ -68,7 +68,7 @@
                 "cale_imagine":"ru.png",
                 "titlu":"Ruj",
                 "descriere":"Ruj",
-                "timp":"00:00-23:59"
+                "timp":"20:00-21:00"
             },
 			{
                 "cale_imagine":"tanti_cu_rimmel.png",

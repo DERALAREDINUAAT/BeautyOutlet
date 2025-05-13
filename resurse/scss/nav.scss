@@ -46,8 +46,8 @@ ul.meniu {
         opacity: 1;
       }
 
-      > a,
-      > div {
+      >a,
+      >div {
         transform: scale(1.2);
       }
     }
@@ -77,23 +77,20 @@ ul.meniu {
 
         &::before {
           left: 0;
-          background: linear-gradient(
-            to right,
-            var(--culoare-text),
-            var(--culoare2)
-          );
+          background: linear-gradient(to right,
+              var(--culoare-text),
+              var(--culoare2));
         }
 
         &::after {
           right: 0;
-          background: linear-gradient(
-            to left,
-            var(--culoare-text),
-            var(--culoare2)
-          );
+          background: linear-gradient(to left,
+              var(--culoare-text),
+              var(--culoare2));
         }
 
         &:hover {
+
           &::before,
           &::after {
             height: 100%;
@@ -103,8 +100,8 @@ ul.meniu {
     }
   }
 
-  > li > a,
-  > li > div {
+  >li>a,
+  >li>div {
     font-size: inherit;
     transition: transform 0.5s ease;
     color: var(--culoare-text);

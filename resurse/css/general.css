@@ -1,9 +1,10 @@
-html{
+html {
     font-size: var(--text-mare);
 }
-body{
-    --spatiere-pagina:80px;
-    --culoare-background:var(--culoare4);
+
+body {
+    --spatiere-pagina: 80px;
+    --culoare-background: var(--culoare4);
     --culoare-deschisa: var(--culoare2);
     --culoare1: #3a5d1b;
     --culoare2: #8ebf45;
@@ -13,148 +14,159 @@ body{
     --culoare6: #004400;
     --culoare-text: #fef5d6;
     --online: #2ecc71;
-    --spatiere:1em;
+    --spatiere: 1em;
     --text-mare: 18px;
     --text-mediu: 16px;
     --text-mic: 14px;
-    --text:10px;
-    --px-mic:8px;
-    --px-mare:15px;
-    --durata-animatie: 0.75s;     
+    --text: 10px;
+    --px-mic: 8px;
+    --px-mare: 15px;
+    --durata-animatie: 0.75s;
     background: rgb(58, 93, 27);
-        background: linear-gradient(90deg, var(--culoare1) 0%, var(--culoare2) 50%, var(--culoare4) 100%);
+    background: linear-gradient(90deg, var(--culoare1) 0%, var(--culoare2) 50%, var(--culoare4) 100%);
 
 }
-h2{
+
+h2 {
     font-size: 1.6rem;
 
 }
-h3{
-    font-size:  1.3rem;
+
+h3 {
+    font-size: 1.3rem;
 
 }
 
 
 
 
-#grid-pagina{
+#grid-pagina {
     display: grid;
     grid-template-areas: "welcome  welcome  welcome  welcome"
-                         "welcome  welcome  welcome  welcome"
-                         "anunturi anunturi    calendar calendar" 
-                         "anunturi anunturi    orar orar"
-                         "utilizatori-online date-utilizator date-utilizator server-stats"
-                         "produse produse produse produse"
-                         "galerie-statica galerie-statica galerie-statica galerie-statica";
+        "welcome  welcome  welcome  welcome"
+        "anunturi anunturi    calendar calendar"
+        "anunturi anunturi    orar orar"
+        "utilizatori-online date-utilizator date-utilizator server-stats"
+        "produse produse produse produse"
+        "galerie-statica galerie-statica galerie-statica galerie-statica";
 
 }
-#grid-pagina > *{
+
+#grid-pagina>* {
     outline: 2px solid var(--culoare-text);
     padding: 7px;
 }
 
-#grid-pagina > figure{
+#grid-pagina>figure {
     margin: 0;
 }
-#grid-pagina img{
+
+#grid-pagina img {
     width: 100%;
     max-width: 300px;
 }
 
 
-main{
+main {
     padding-left: var(--spatiere-pagina);
     padding-right: var(--spatiere-pagina);
 }
 
 
-#welcome{
+#welcome {
     grid-area: welcome;
 }
-#date-utilizator{
+
+#date-utilizator {
     grid-area: date-utilizator;
 }
-#anunturi{
+
+#anunturi {
     grid-area: anunturi;
 }
-#orar{
+
+#orar {
     grid-area: orar;
 }
- 
-#utilizatori-online{
+
+#utilizatori-online {
     grid-area: utilizatori-online;
 }
-#calendar{
+
+#calendar {
     grid-area: calendar;
 }
-#server-stats{
+
+#server-stats {
     grid-area: server-stats;
 }
-#produse{
+
+#produse {
     grid-area: produse;
 }
-#galerie-statica{
+
+#galerie-statica {
     grid-area: galerie-statica;
 }
 
 
-figcaption{
-    text-align:center;
+figcaption {
+    text-align: center;
 }
 
-h1{
+h1 {
     font-family: "Pacifico", cursive;
     font-weight: 400;
     font-style: normal;
 }
 
 @media screen and (max-width:1000px) {
-    html{
+    html {
         font-size: var(--text-mic);
     }
 
-    body{
-        --spatiere-pagina:50px;
-    }   
-    
-    nav{
+    body {
+        --spatiere-pagina: 50px;
+    }
+
+    nav {
         font-size: var(--text-mediu)
     }
-    
-    #grid-pagina{
+
+    #grid-pagina {
         grid-template-rows: 1fr 1fr;
         grid-template-areas: "welcome  welcome"
-                             "orar orar"
-                             "calendar calendar"
-                             "anunturi anunturi" 
-                             "utilizatori-online utilizatori-online"
-                             "date-utilizator date-utilizator"
-                             "server-stats server-stats"
-                             "produse produse"
-                             "galerie-statica galerie-statica";
-    
+            "orar orar"
+            "calendar calendar"
+            "anunturi anunturi"
+            "utilizatori-online utilizatori-online"
+            "date-utilizator date-utilizator"
+            "server-stats server-stats"
+            "produse produse"
+            "galerie-statica galerie-statica";
+
     }
 
 }
 
 
 @media screen and (max-width:700px) {
-    #grid-pagina{
+    #grid-pagina {
         display: block;
     }
 
-    html{
+    html {
         font-size: var(--text);
     }
 
-    nav{
+    nav {
         font-size: var(--text-mic)
     }
 
-    body{
-        --spatiere-pagina:20px;
-    }    
-    
+    body {
+        --spatiere-pagina: 20px;
+    }
+
 }
 
 /* [CALENDAR EVENIMENTE] */
@@ -201,6 +213,7 @@ h1{
     .zi-eveniment {
         flex-direction: column;
     }
+
     .data {
         width: 100%;
     }
@@ -317,13 +330,20 @@ h1{
 
 /* Animatie loading */
 @keyframes blink {
-    0% { opacity: 0.3; }
-    50% { opacity: 1; }
-    100% { opacity: 0.3; }
+    0% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
 }
 
 .loading::after {
     content: "*";
     animation: blink 1.5s infinite;
 }
-

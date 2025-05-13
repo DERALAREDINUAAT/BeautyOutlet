@@ -1,8 +1,11 @@
 $a: red;
-p{
-    color:$a;
+
+p {
+    color: $a;
 }
-$a:green;
-div{
-    color:$a;
+
+$a: green;
+
+div {
+    color: $a;
 }

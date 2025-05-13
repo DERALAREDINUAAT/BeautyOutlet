@@ -15,7 +15,8 @@ table caption {
     margin-top: 10px;
 }
 
-table th, table td {
+table th,
+table td {
     border: 1px solid var(--culoare1);
     padding: 8px;
     text-align: center;

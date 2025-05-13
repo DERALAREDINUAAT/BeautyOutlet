@@ -1,19 +1,19 @@
 math {
-    font-family: Arial, sans-serif; 
-  }
-  
-  mi {
-    font-style: italic; 
-  }
-  
-  mo {
-    color: var(--culoare-text); 
-  }
-  
-  mfrac {
-    color: var(--culoare4); 
-  }
-  
-  mn {
-    font-weight: bold; 
-  }
+  font-family: Arial, sans-serif;
+}
+
+mi {
+  font-style: italic;
+}
+
+mo {
+  color: var(--culoare-text);
+}
+
+mfrac {
+  color: var(--culoare4);
+}
+
+mn {
+  font-weight: bold;
+}

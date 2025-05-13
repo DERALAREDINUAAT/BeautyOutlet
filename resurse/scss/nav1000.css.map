@@ -1,1 +1,10 @@
-{"version":3,"sourceRoot":"","sources":["nav1000.scss"],"names":[],"mappings":"AAEI;EACE;;AAGF;EACE","file":"nav1000.css"}
+{
+    "version": 3,
+    "sourceRoot": "",
+    "sources": [
+        "nav1000.scss"
+    ],
+    "names": [],
+    "mappings": "AAEI;EACE;;AAGF;EACE",
+    "file": "nav1000.css"
+}

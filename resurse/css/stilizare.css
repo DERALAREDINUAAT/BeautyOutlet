@@ -1,47 +1,47 @@
 :root {
-  --culoare-c1: rgb(72, 174, 44); 
+  --culoare-c1: rgb(72, 174, 44);
   --culoare-c2: rgb(2, 58, 2);
 }
 
 a:link {
- color: var(--culoare-c2); 
- position: relative;
- overflow: hidden;
- text-decoration: none;
- background-image: radial-gradient( var(--culoare-c1) 0%, var(--culoare-c1) 40%, transparent 80%, transparent 100%);
- background-position: center;
- background-repeat: no-repeat;
- background-size: 0% ;
- transition: background-size 4s ease;
+  color: var(--culoare-c2);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  background-image: radial-gradient(var(--culoare-c1) 0%, var(--culoare-c1) 40%, transparent 80%, transparent 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 0%;
+  transition: background-size 4s ease;
 }
 
 a:hover {
- background-size: 100%;
- transition: background-size 4s ; 
+  background-size: 100%;
+  transition: background-size 4s;
 }
 
 a[href^="http"] {
- color: var(--culoare-c2);
- position: relative;
+  color: var(--culoare-c2);
+  position: relative;
 }
 
 a[href^="http"]::before {
- content: "⮳";
- font-size: 1.5rem; 
- margin-right: 0.3em;
- display: inline-block;
- color: var(--culoare-c2);
- transition: color 0.3s ease; 
+  content: "⮳";
+  font-size: 1.5rem;
+  margin-right: 0.3em;
+  display: inline-block;
+  color: var(--culoare-c2);
+  transition: color 0.3s ease;
 }
 
 a[href^="http"]:hover::before {
- color: var(--culoare-c1);
+  color: var(--culoare-c1);
 }
 
 a:visited {
- color: var(--culoare-c2);
+  color: var(--culoare-c2);
 }
 
-a:active{
- border:1px solid var(--culoare-c2); 
+a:active {
+  border: 1px solid var(--culoare-c2);
 }

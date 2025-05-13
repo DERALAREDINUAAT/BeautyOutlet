@@ -21,7 +21,7 @@
   line-height: 1;
   color: #444;
   position: absolute;
-  z-index: 1; 
+  z-index: 1;
 }
 
 
@@ -44,7 +44,7 @@
 }
 
 .linie-decorativa .capat-stanga::after {
-  top: -0.6em; 
+  top: -0.6em;
   left: 0;
   transform: scaleY(-1);
 }

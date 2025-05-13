@@ -1,30 +1,37 @@
 /* Stilizarea generală a containerului pentru taburi */
 .tab-container {
     display: flex;
-    justify-content: flex-end; /* Aliniază taburile la dreapta */
-    gap: 10px; /* Spațiu între taburi */
-    padding-top: 0px; /* Spațiu deasupra taburilor */
-    width: 100%; /* Asigură-te că containerul ocupă întreaga lățime disponibilă */
+    justify-content: flex-end;
+    /* Aliniază taburile la dreapta */
+    gap: 10px;
+    /* Spațiu între taburi */
+    padding-top: 0px;
+    /* Spațiu deasupra taburilor */
+    width: 100%;
+    /* Asigură-te că containerul ocupă întreaga lățime disponibilă */
 }
 
 /* Stilizarea taburilor */
 .tab {
     display: block;
     padding: 8px 20px;
-    background-color: var(--culoare3); 
-    color: var(--culoare5); 
-    text-decoration: none; /* Elimină sublinierea */
-    border: 1px solid var(--culoare1); 
-    border-radius: 0 0 10px 10px; /* Rotunjire doar în partea de jos a taburilor */
+    background-color: var(--culoare3);
+    color: var(--culoare5);
+    text-decoration: none;
+    /* Elimină sublinierea */
+    border: 1px solid var(--culoare1);
+    border-radius: 0 0 10px 10px;
+    /* Rotunjire doar în partea de jos a taburilor */
     cursor: pointer;
-    transition: background-color 0.3s; /* Tranziții pentru efectul de hover */
-    box-shadow: inset 0 0 10px var(--culoare6); 
+    transition: background-color 0.3s;
+    /* Tranziții pentru efectul de hover */
+    box-shadow: inset 0 0 10px var(--culoare6);
 }
 
 .tab:hover {
-    background-color: var(--culoare-text); 
-    color: #000000; 
-    box-shadow: inset 0 0 10px var(--culoare3); 
+    background-color: var(--culoare-text);
+    color: #000000;
+    box-shadow: inset 0 0 10px var(--culoare3);
 }
 
 /* Stilizarea iframe-ului */
@@ -32,6 +39,8 @@
     width: 100%;
     height: 300px;
     border: 1px solid var(--culoare3);
-    border-radius: 5px; /* Colțuri rotunjite pentru iframe */
-    margin-top: 10px; /* Distanță între taburi și iframe */
+    border-radius: 5px;
+    /* Colțuri rotunjite pentru iframe */
+    margin-top: 10px;
+    /* Distanță între taburi și iframe */
 }

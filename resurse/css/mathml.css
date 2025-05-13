@@ -1,19 +1,19 @@
 math {
-    font-family: Arial, sans-serif; /* Font general pentru toată formula */
+    font-family: Arial, sans-serif; 
   }
   
   mi {
-    font-style: italic; /* Toate elementele mi vor fi în italic */
+    font-style: italic; 
   }
   
   mo {
-    color: var(--culoare3); /* Operatorii vor fi colorați în albastru */
+    color: var(--culoare-text); 
   }
   
   mfrac {
-    color: var(--culoare4); /* Fracțiile vor fi colorate în roșu */
+    color: var(--culoare4); 
   }
   
   mn {
-    font-weight: bold; /* Numerele vor fi bold */
+    font-weight: bold; 
   }

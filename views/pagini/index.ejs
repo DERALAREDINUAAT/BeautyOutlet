@@ -1,0 +1,388 @@
+<!-- Cerința 1: Structura de bază a HTML-ului -->
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <!-- Cerința 2: Meta taguri relevante pentru SEO -->
+    <title>BeautyOutlet - Reduceri Cosmetice & Parfumuri</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="outlet cosmetice, reduceri parfumuri, oferte speciale, produse beauty ieftine">
+    <meta name="description" content="Descoperă cele mai bune oferte la cosmetice și parfumuri în outlet-ul nostru online!">
+    <meta name="author" content="Daria-Elena Răduț">
+    <!-- Cerința 3: Configurarea favicon-urilor pentru diferite dispozitive -->
+    <meta charset="UTF-8">
+    <%- include("../fragmente/head.ejs") %>
+</head>
+<body>
+    <header>
+<%- include("../fragmente/header.ejs") %>
+<div id="container-reflexie">
+  <div id="text">BeautyOutlet</div>
+  <div id="text-reflectat">BeautyOutlet</div>
+</div>
+</header>
+<main>
+    <div id="grid-pagina">
+        <section id="welcome">
+        <!-- Cerința 5: Utilizarea tagurilor de secționare -->
+        <h2>Bine ai venit la BeautyOutlet!</h2>
+        <p>La <strong>BeautyOutlet</strong>, găsești <b>reduceri cosmetice</b> și <b>parfumuri celebre</b> disponibile exclusiv în outlet-ul nostru online.</p>
+        <section id="beauty">
+            <h2>Produse Beauty la Reducere</h2>
+            <p>Descoperă gama noastră de <b>produse naturale</b> la prețuri reduse. De la <b>fond de ten</b> și <b>rujuri Yves Rocher</b> până la <b>serumuri și tratamente</b> pentru un ten radiant.</p>
+            <p><i>Oferte exclusive</i> te așteaptă zilnic la BeautyOutlet!</p>
+        </section>
+        <div id="container-video">
+            <div id="centrare-video">
+                <div id="clip-video">
+                    <div id="stil-video">
+                        <video 
+                            width="100%" 
+                            controls 
+                            preload="metadata" 
+                            poster="/resurse/imagini/poster-video.jpg">
+                            
+                            <source src="/resurse/video/video.mp4" type="video/mp4">
+                            <source src="/resurse/video/video.webm" type="video/webm">
+                            
+                            <track 
+                                src="/resurse/video/subtitrari-en.vtt" 
+                                kind="subtitles" 
+                                srclang="en" 
+                                label="English">   
+                                
+                                <track 
+                                src="/resurse/video/subtitrari-ro.vtt" 
+                                kind="subtitles" 
+                                srclang="ro" 
+                                label="Romana"
+                                default>
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <section>
+            <h2>Promoții speciale</h2>
+            <p>Profită acum de cele mai bune <b>oferte speciale</b> la parfumuri și cosmetice! Vizitează secțiunea noastră de <b>lichidări de stoc</b> pentru a găsi produsele tale preferate la prețuri imbatabile.</p>
+            <!-- Bonus 1: Folosirea unei formule în MathML -->
+            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                <mrow>
+                  <mi>Economie</mi>
+                  <mo>%</mo>
+                  <mo>=</mo>
+                  <mfrac>
+                    <mrow>
+                      <mo>(</mo>
+                      <mi>Preț</mi>
+                      <mi>Original</mi>
+                      <mo>-</mo>
+                      <mi>Preț</mi>
+                      <mi>Redus</mi>
+                      <mo>)</mo>
+                    </mrow>
+                    <mrow>
+                      <mi>Preț</mi>
+                      <mi>Original</mi>
+                    </mrow>
+                  </mfrac>
+                  <mo>×</mo>
+                  <mn>100</mn>
+                </mrow>
+              </math>
+        </section>
+        <section id="subsectiune2">
+            <h3>Oferte Video</h3>
+            <p>Descoperă promoțiile noastre speciale în format video:</p>
+            <iframe name="ifr-video" class="iframe-style" width="560" height="315" src="https://www.youtube.com/embed/ZXLSJIv26Fo" 
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            <!-- Cerința 11c: Linkuri care se deschid într-un iframe -->
+            <div class="tab-container">
+                <a href="https://www.youtube.com/embed/ZXLSJIv26Fo" target="ifr-video" class="tab">Vizionați oferta 1</a>
+                <a href="https://www.youtube.com/embed/My1yxo5Qvzc" target="ifr-video" class="tab">Vizionați oferta 2</a>
+                <a href="https://www.youtube.com/embed/hgcfOYCVSXU" target="ifr-video" class="tab">Vizionați oferta 3</a>
+            </div>
+            </section>
+        <!-- Cerința 8: Imagini responsive cu figure și figcaption -->
+        <figure>
+            <picture>
+                <source media="(max-width:600px)" srcset="./resurse/imagini/imagine_ruj600.jpg">
+                <source media="(max-width:800px)" srcset="./resurse/imagini/imagine_ruj800.jpg">
+                <img src="./resurse/imagini/imagine_ruj1200.jpg" alt="Oferte BeautyOutlet" width=100%>
+            </picture>
+            <figcaption>Reduceri incredibile la cosmetice și parfumuri.</figcaption>
+        </figure>
+        <!-- Bonus 3: Crearea unei hărți de imagini -->
+        <figure>
+            <img src="./resurse/imagini/harta_imagine.png" alt="Planul magazinului" usemap="#beautystoremap">
+            <map name="beautystoremap">
+                <area shape="rect" coords="50,50,200,200" href="https://www.sephora.com" alt="Sephora" title="Vizitează Sephora">
+                <area shape="rect" coords="210,50,360,200" href="https://www.ulta.com" alt="Ulta Beauty" title="Vizitează Ulta Beauty">
+                <area shape="circle" coords="425,125,75" href="https://www.maccosmetics.com" alt="MAC Cosmetics" title="Vizitează MAC Cosmetics">
+            </map>
+            <figcaption>Harta interactivă a magazinului BeautyOutlet.</figcaption>
+        </figure>
+    </section>
+    <section id="produse">
+        <h2>Produsele noastre</h2>
+
+        <p>Vă oferim o multitudine de metode să câștigați cu succes kilograme în plus.</p>
+        <section>
+            <h3>Torturi</h3>
+            <p>În caz că nu le puteți mânca fiindcă sunteți la dietă și doar vă uitați la ele, puneți accentul pe u!</p>
+            <p>Avem torturi cu:</p>
+            <ul>
+                <li>ciocolată</li>
+                <li>frișcă</li>
+                <li>fructe</li>
+                <li>dulceață</li>
+                <li>înghețată</li>
+                <li>regrete</li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Prăjituri</h3>
+            <p>Oferim prăjiturile clasice plus câteva creations personnelles, oui!</p>
+            <p>Prăjituri:</p>
+            <ul>
+                <li>savarină</li>
+                <li>amandină</li>
+                <li>tartă cu fructe</li>
+                <li>doboș</li>
+                <li>carpați (orientali, meridionali și occidentali)</li>
+                <li>ecler</li>
+                <li>tiramisu</li>
+                <li>colivă</li>
+            </ul>
+        </section>
+        
+        <section>
+            <h3>Pateuri</h3>
+            <p>Pateurile noastre sunt umplute cu:</p>
+            <ul>
+                <li>brânză</li>
+                <li>pizza</li>
+                <li>spanac</li>
+                <li>ciuperci</li>
+                <li>compoziție secretă (sincer, nici noi nu mai știm ce conține)</li>
+            </ul>
+        </section>
+        <div id="container-duotone">
+    <div id="imagine-duotone"></div> 
+</div>
+    </section>
+    <!--orar-->
+    <section id="orar">
+        <h2>Orar</h2>
+        <table id="tab-orar">
+            <thead>
+
+                <tr>
+                    <th>Zi</th>
+                    <th>Promoții</th>
+                    <th>Interval dimineata</th>
+                    <th>Pauza de masa</th>
+                    <th>Interval seară</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Luni</td>
+                    <td rowspan="5">Zile<br/>Lucrătoare</td>
+                    <td>10-12</td>
+                    <td>12-14</td>
+                    <td>14-20</td>
+                </tr>
+                <tr>
+                    <td>Marti</td>
+                    <td>9-12</td>
+                    <td>12-14</td>
+                    <td>14-21</td>
+                </tr>
+                <tr>
+                    <td>Miercuri</td>
+                    <td>9-11</td>
+                    <td>11-13</td>
+                    <td>14-21</td>
+                </tr>
+                <tr>
+                    <td>Joi</td>
+                    <td>9-11</td>
+                    <td>11-13</td>
+                    <td>14-21</td>
+                </tr>
+                <tr>
+                    <td>Vineri</td>
+                    <td>9-12</td>
+                    <td>12-14</td>
+                    <td>14-19</td>
+                </tr>
+                <tr>
+                    <td>Sambata</td>
+                    <td>"Cumperi 1, primesti 2!" la orice ruj</td>
+                    <td>10-12</td>
+                    <td>12-13</td>
+                    <td>13-16</td>
+                </tr>
+                <tr>
+                    <td>Duminica</td>
+                    <td>-30% la orice parfum</td>
+                    <td>10-14</td>
+                    <td>-</td>
+                    <td>inchis</td>
+                </tr>
+            </tbody>
+        </table> 
+    </section>
+    
+
+<section id="calendar">
+<h2>Evenimente Speciale</h2>
+<div class="calendar-grid">
+    <div class="zi-eveniment">
+        <div class="data">15 Nov</div>
+        <div class="eveniment">
+            <h3>Lansare Parfum Nou</h3>
+            <p>10:00-18:00 | Reducere 25%</p>
+        </div>
+    </div>
+    <div class="zi-eveniment">
+        <div class="data">20 Nov</div>
+        <div class="eveniment">
+            <h3>Workshop Machiaj</h3>
+            <p>14:00-16:00 | Gratuit</p>
+        </div>
+    </div>
+    <div class="zi-eveniment">
+        <div class="data">25 Nov</div>
+        <div class="eveniment">
+            <h3>Black Friday</h3>
+            <p>Toată ziua | Reduceri până la 70%</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section id="utilizatori-online">
+<h2><i class="fas fa-users"></i> Utilizatori online acum (3)</h2>
+<ul class="lista-utilizatori">
+    <li>
+        <img src="./resurse/imagini/imagine_oja.jpg" alt="Utilizator 1">
+        <span>MariaP</span>
+        <span class="status-online"></span>
+    </li>
+    <li>
+        <img src="./resurse/imagini/imagine_parfum.jpg" alt="Utilizator 2">
+        <span>AnaCosmetics</span>
+        <span class="status-online"></span>
+    </li>
+    <li>
+        <img src="./resurse/imagini/imagine_rimmel.jpg" alt="Utilizator 3">
+        <span>BogdanMakeup</span>
+        <span class="status-online"></span>
+    </li>
+</ul>
+</section>
+<section id="date-utilizator">
+<h2><i class="fas fa-user-chart"></i> Statistici utilizator</h2>
+<div class="placeholder-content">
+    <div class="stat-box">
+        <i class="fas fa-heart"></i>
+        <h3>Produse favorite</h3>
+        <p>În curs de colectare...</p>
+    </div>
+    <div class="stat-box">
+        <i class="fas fa-shopping-basket"></i>
+        <h3>Istoric comenzi</h3>
+        <p>Va apărea aici</p>
+    </div>
+    <div class="stat-box">
+        <i class="fas fa-trophy"></i>
+        <h3>Recompense</h3>
+        <p>0 puncte colectate</p>
+    </div>
+</div>
+</section>
+<section id="server-stats">
+<h2><i class="fas fa-server"></i> Status server</h2>
+<div class="placeholder-content">
+    <div class="server-stat">
+        <div class="stat-label">
+            <i class="fas fa-users"></i>
+            <span>Utilizatori înregistrați:</span>
+        </div>
+        <div class="stat-value loading">...</div>
+    </div>
+    <div class="server-stat">
+        <div class="stat-label">
+            <i class="fas fa-box-open"></i>
+            <span>Produse în stoc:</span>
+        </div>
+        <div class="stat-value loading">...</div>
+    </div>
+    <div class="server-stat">
+        <div class="stat-label">
+            <i class="fas fa-bolt"></i>
+            <span>Status server:</span>
+        </div>
+        <div class="stat-value online">Online</div>
+    </div>
+</div>
+</section>
+
+    <section id="anunturi">
+        <h2>Anunțuri</h2> <p><time datetime="2022-01-05">5 ianuarie 2022</time> <strong>No more Covid!!!!</strong></p>
+       
+        <p><time datetime="2020-07-05">5 iulie 2020</time> Am adăugat o prăjitură noua în meniu</p>
+        <p><time datetime="2020-09-15">15 septembrie 2020</time> Am adăugat un fursec nou în meniu</p>
+        <p><time datetime="2020-12-20">20 decembrie 2020</time> Nu avem nimic de anunțat, dar ne era dor de voi.</p>
+        <p><time datetime="2020-12-28">28 decembrie 2020</time> Am adăugat o prăjitură noua în meniu</p>
+        <p><time datetime="2021-01-01">1 ianuarie 2021</time> Un an nou fericit!</p>
+        <p><time datetime="2021-02-11">11 februarie 2021</time> Studiile au arătat că prăjiturile sunt cele mai sănătoase alimente. 
+            E adevărat că doar studiile noastre, dar astea sunt detalii. </p>
+    <!-- Cerința 12: Detalii și summary -->
+     <section id="index-intrebari">
+        <h3>Întrebări frecvente (FAQ)</h3>
+        <details>
+        <summary>Care este politica de returnare?</summary>
+        <p>Produsele achiziționate pot fi returnate în termen de 30 de zile.</p>
+    </details>
+    <details>
+        <summary>Ce modalități de plată acceptați?</summary>
+        <p>Acceptăm plata cu cardul, PayPal și la livrare.</p>
+    </details>
+    <details>
+        <summary>Cum pot afla când sunt reduceri?</summary>
+        <p>Abonează-te la newsletter și vei fi notificat imediat ce apar reduceri noi.</p>
+    </details>
+</section>
+    <!-- Bonus 2: Afișarea unui PDF în pagină -->
+    <object data="./resurse/termeni_si_conditii/Termeni_și_Condiții_pentru_BeautyOutlet.pdf" type="application/pdf" width="500" height="300">
+        <p>Acest document nu poate fi afișat - <a href="./resurse/termeni_si_conditii/Termeni_și_Condiții_pentru_BeautyOutlet.pdf">descarcă Termeni și Condiții</a>.</p>
+    </object>
+    <br>
+    <a href="./resurse/imagini/ico/favicon.svg" download="favicon.svg">Descarcă favicon</a>
+    <p>Vizitează și site-ul oficial <a href="https://www.yves-rocher.ro" target="_blank">Yves Rocher</a> pentru mai multe produse.</p>
+</section>
+</div> 
+
+<div class="linie-decorativa">
+  <span class="capat-stanga" data-reflexie="☾">☾</span>
+  <span class="linie"></span>
+  <span class="capat-dreapta" data-reflexie="☽">☽</span>
+</div>
+
+    <%- include("../fragmente/fragment.ejs")%>
+
+<div class="linie-decorativa">
+  <span class="capat-stanga" data-reflexie="☾">☾</span>
+  <span class="linie"></span>
+  <span class="capat-dreapta" data-reflexie="☽">☽</span>
+</div>
+
+</main> 
+    <%- include("../fragmente/footer.ejs") %>
+</body>
+</html>

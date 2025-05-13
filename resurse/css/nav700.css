@@ -3,27 +3,33 @@
 }
 
 ul.meniu{
-    display: none;
+    display: block;
     margin: 0;
-    width: 100%;
+    width:100%;
     background-color: var(--culoare-deschisa);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease-in-out;
 }
 
 ul.meniu li{
     margin: 0;
-    width: 100%;
+    width:100%;
 }
 
 #hamburger>img{
-    height: var(--inaltime-meniu);
+    height:var(--inaltime-meniu);
+    display: block;
 }
 
-#ch-menu+ul.meniu{
+#ch-menu:checked+ul.meniu{
     display: block;
     position: relative;
     z-index: 10;
+    transform: scaleX(1);
 }
 
 main{
-    margin-top: 20px;
+    margin-top:20px;
 }
+

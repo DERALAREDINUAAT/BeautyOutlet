@@ -1,0 +1,86 @@
+{
+	"cale_galerie":"resurse/imagini/galerie",
+	"imagini": [
+			{
+                "cale_imagine":"masca_faciala.png",
+                "titlu":"Masca faciala",
+                "descriere":"Masca pentru hidratarea fetei",
+                "timp":"00:00-23:59"
+            },
+			{
+                "cale_imagine":"paleta.png",
+                "titlu":"Paleta",
+                "descriere":"Paleta machiaj",
+                "timp":"00:00-23:59"
+            },
+			{
+                "cale_imagine":"palete.png",
+                "titlu":"Palete",
+                "descriere":"Diverse palete de machiaj",
+                "timp":"00:00-23:59"
+            },
+			{
+                "cale_imagine":"parfum1.png",
+                "titlu":"Parfum",
+                "descriere":"Parfum",
+                "timp":"00:00-23:59"
+            },
+			{
+                "cale_imagine":"parfum2.png",
+                "titlu":"Parfum",
+                "descriere":"Parfum",
+                "timp":"00:00-23:59"
+            },
+			{
+                "cale_imagine":"parfum3.png",
+                "titlu":"Parfum",
+                "descriere":"Parfum",
+                "timp":"00:00-23:59"
+            },
+			{
+                "cale_imagine":"rsz_1imagine_oja.png",
+                "titlu":"Oja",
+                "descriere":"Oja",
+                "timp":"00:00-23:59"
+            },
+			{
+                "cale_imagine":"rsz_1imagine_parfum.png",
+                "titlu":"Parfum",
+                "descriere":"Parfum",
+                "timp":"00:00-23:59"
+            },
+			{
+                "cale_imagine":"rsz_1imagine_rimmel.png",
+                "titlu":"Rimmel",
+                "descriere":"Rimmel",
+                "timp":"00:00-23:59"
+            },
+            {
+                "cale_imagine":"Femeie_machiata.jpg",
+                "titlu":"Admiration with astonishment",
+                "descriere":"Admiration with astonishment",
+                "timp":"00:50-00:51",
+                "sursa":"https://commons.wikimedia.org/wiki/File:%22Admiration_with_astonishment%22_Wellcome_L0010186.jpg",
+                "licenta":"CC-BY 4.0",
+                "autor": "Charles Le Brun"
+            },
+			{
+                "cale_imagine":"ru.png",
+                "titlu":"Ruj",
+                "descriere":"Ruj",
+                "timp":"00:00-23:59"
+            },
+			{
+                "cale_imagine":"tanti_cu_rimmel.png",
+                "titlu":"Rimmel",
+                "descriere":"Rimmel",
+                "timp":"00:00-23:59"
+            },
+			{
+                "cale_imagine":"tus.png",
+                "titlu":"Tus",
+                "descriere":"Tus",
+                "timp":"00:00-23:59"
+            }
+	]
+}

@@ -10,37 +10,45 @@
     <meta name="description" content="Descoperă cele mai bune oferte la cosmetice și parfumuri în outlet-ul nostru online!">
     <meta name="author" content="Daria-Elena Răduț">
     <!-- Cerința 3: Configurarea favicon-urilor pentru diferite dispozitive -->
-    <link rel="icon" type="image/png" href="./resurse/ico/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/svg+xml" href="./resurse/ico/favicon.svg">
-    <link rel="shortcut icon" href="./resurse/ico/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="./resurse/ico/apple-touch-icon.png">
-    <link rel="manifest" href="./resurse/ico/site.webmanifest">
+    <link rel="icon" type="image/png" href="./resurse/imagini/ico/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="./resurse/imagini/ico/favicon.svg">
+    <link rel="shortcut icon" href="./resurse/imagini/ico/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./resurse/imagini/ico/apple-touch-icon.png">
+    <link rel="manifest" href="./resurse/imagini/ico/site.webmanifest">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="apple-mobile-web-app-title" content="BeautyOutlet">
     <link rel="stylesheet" href="./resurse/css/stil.css" type="text/css">
+    <link rel="stylesheet" href="./resurse/css/stilizare.css" type="text/css">
+    <link rel="stylesheet" href="./resurse/css/video.css" type="text/css">
     <link rel="stylesheet" href="./resurse/css/buton.css" type="text/css">
     <link rel="stylesheet" href="./resurse/css/general.css" type="text/css">
     <link rel="stylesheet" href="./resurse/css/nav.css" type="text/css">
-    <link rel="stylesheet" href="./resurse/css/nav1000.css" type="text/css">
+    <link rel="stylesheet" media="screen and (min-width: 1000px)" href="./resurse/css/nav1000.css" type="text/css">
+    <link rel="stylesheet" media="screen and (max-width: 700px)" href="./resurse/css/nav700.css" type="text/css">
     <link rel="stylesheet" href="./resurse/css/orar.css" type="text/css">
     <link rel="stylesheet" href="./resurse/css/taburi.css" type="text/css">
     <link rel="stylesheet" href="./resurse/css/mathml.css" type="text/css">
+    <link rel="stylesheet" href="./resurse/css/galerie.css" type="text/css">
+    <link rel="stylesheet" href="./resurse/css/duotone.css" type="text/css">
+    <link rel="stylesheet" href="./resurse/css/linie.css" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
 </head>
 <body>
     <header class="c1" id="titlu" >
-        <h1 style="color:red;">BeautyOutlet - Reduceri Cosmetice & Parfumuri</h1>
+        <h1 style="color: var(--culoare-text);">BeautyOutlet - Reduceri Cosmetice & Parfumuri</h1>
        
     </header>
     <nav>
-        <!--hamburger-icon-->    
+        <!--hamburger-icon-->   
         <label id="hamburger" for="ch-menu">
             <img src="resurse/imagini/Hamburger_icon_alb.png" alt="menu">
-        </label>
+        </label> 
         <!--meniu-->
         <input id="ch-menu" type="checkbox">
         <ul class="meniu">
-            <li><div class="text-icon" id="acasa">Acasa</div><div class="imag-icon" id="acasa-mediu"><span class="fas fa-regular fa-house"></span></div>
+            <li>
+                <div class="imag-icon" id="acasa-mediu"><span class="fas fa-regular fa-house"></span></div>
+                <div class="text-icon" id="acasa">Acasa</div>
                 <ul>
                     <li><a href="#welcome">Bine ati venit</a></li>
                     <li><a href="#promotii">Promotii</a></li>
@@ -55,8 +63,8 @@
             </li>
             
             <!-- <li><div class="text-icon"><a href="#">Inregistrare</a></div><div class="imag-icon" ><span class="fas fa-solid fa-book"></span></div></li> -->
-            <li><div>Despre</div>
-                <ul>                        
+            <li><div><a href="despre.html">Despre</a></div>
+                <ul>                     
                     <li><a href="despre.html#prezentare">Prezentare</a></li>
                     <li><a href="despre.html#istoric">Istoric</a></li>
                     <li><a href="despre.html#motivatie">Motivatie</a></li>
@@ -87,6 +95,37 @@
                 <p>Descoperă gama noastră de <b>produse naturale</b> la prețuri reduse. De la <b>fond de ten</b> și <b>rujuri Yves Rocher</b> până la <b>serumuri și tratamente</b> pentru un ten radiant.</p>
                 <p><i>Oferte exclusive</i> te așteaptă zilnic la BeautyOutlet!</p>
             </section>
+            <div id="container-video">
+                <div id="centrare-video">
+                    <div id="clip-video">
+                        <div id="stil-video">
+                            <video 
+                                width="100%" 
+                                controls 
+                                preload="metadata" 
+                                poster="/resurse/imagini/poster-video.jpg">
+                                
+                                <source src="/resurse/video/video.mp4" type="video/mp4">
+                                <source src="/resurse/video/video.webm" type="video/webm">
+            
+                                <track 
+                                    src="/resurse/video/subtitrari-ro.vtt" 
+                                    kind="subtitles" 
+                                    srclang="ro" 
+                                    label="Română" 
+                                    default>
+                                
+                                <track 
+                                    src="/resurse/video/subtitrari-en.vtt" 
+                                    kind="subtitles" 
+                                    srclang="en" 
+                                    label="English">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <section>
                 <h2>Promoții speciale</h2>
                 <p>Profită acum de cele mai bune <b>oferte speciale</b> la parfumuri și cosmetice! Vizitează secțiunea noastră de <b>lichidări de stoc</b> pentru a găsi produsele tale preferate la prețuri imbatabile.</p>
@@ -167,6 +206,11 @@
                     <li>regrete</li>
                 </ul>
             </section>
+
+<div class="linie-cu-simbol">
+    <div class="reflectie"></div>
+</div>
+
             <section>
                 <h3>Prăjituri</h3>
                 <p>Oferim prăjiturile clasice plus câteva creations personnelles, oui!</p>
@@ -194,6 +238,9 @@
                     <li>compoziție secretă (sincer, nici noi nu mai știm ce conține)</li>
                 </ul>
             </section>
+            <div id="container-duotone">
+    <div id="imagine-duotone"></div> 
+</div>
         </section>
         <!--orar-->
         <section id="orar">
@@ -385,13 +432,18 @@
             <p>Acest document nu poate fi afișat - <a href="./resurse/termeni_si_conditii/Termeni_și_Condiții_pentru_BeautyOutlet.pdf">descarcă Termeni și Condiții</a>.</p>
         </object>
         <br>
-        <a href="./resurse/ico/favicon.svg" download="favicon.svg">Descarcă favicon</a>
+        <a href="./resurse/imagini/ico/favicon.svg" download="favicon.svg">Descarcă favicon</a>
         <p>Vizitează și site-ul oficial <a href="https://www.yves-rocher.ro" target="_blank">Yves Rocher</a> pentru mai multe produse.</p>
     </section>
 </div> 
+
     </main>
 
     <footer>
+        <div id = "banner">Acesta este un proiect școlar!</div>
+    <div id = "watermark">
+        <p>Radut Daria-Elena</p>
+    </div>
         <!-- Cerința 13: Informații de contact în footer -->
         <a href="https://www.google.com" target="_blank">Google</a>
         <br>

@@ -1,0 +1,28 @@
+video {
+    width: 90%;
+    min-width: 300px;
+    max-width: 800px;
+    display: block;
+    margin: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* variabilele de culoare */
+:root {
+    --c1-deschis: #fce9e9;
+    --c2-inchis: #2c2c2c;
+}
+
+video::cue {
+    background-color: var(--c1-deschis);
+    color: var(--c2-inchis);
+    font-size: 1rem;
+    text-shadow: none;
+    padding: 0.2em 0.4em;
+}
+
+/* Subtitrare specială în colțul dreapta sus (dacă e susținut) */
+video::cue(.dreapta-sus) {
+    text-align: right;
+}

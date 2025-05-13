@@ -1,91 +1,116 @@
-
-
-#hamburger, #ch-menu {
-    display: none;
+#hamburger,
+#ch-menu {
+  display: none;
 }
 
-nav{
-    background-color: var(--culoare-deschisa);
-    --inaltime-meniu:30px;
-    --latime-buton:200px;
+nav {
+  background-color: var(--culoare-deschisa);
+  --inaltime-meniu: 30px;
+  --latime-buton: 150px;
+  height: var(--inaltime-meniu);
+  position: sticky;
+  top: 0;
+}
+
+ul.meniu {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+
+  li {
+    width: var(--latime-buton);
     height: var(--inaltime-meniu);
-    position: sticky;
-    top: 0;
-}
+    border: 1px solid var(--culoare-text);
+    box-sizing: border-box;
+    text-align: center;
+    font-weight: bold;
+    line-height: var(--inaltime-meniu);
+    transition: all 1s linear;
+    position: relative;
 
-ul.meniu li div.imag-icon{
-    display: none;
-}
+    div.imag-icon {
+      display: block;
+    }
 
-.imag-icon{
-    display: none;
-}
+    div.text-icon {
+      display: none;
+    }
 
+    &:hover {
+      ul {
+        display: block;
+        background-color: var(--culoare-deschisa);
+        position: relative;
+        left: 0;
+        transform: scaleY(1);
+        opacity: 1;
+      }
 
-ul.meniu{
-    display: flex;
-    list-style-type: none;
-    padding: 0; 
+      > a,
+      > div {
+        transform: scale(1.2);
+      }
+    }
 
     ul {
-        display: none;
-        padding: 0;
-    }
-    
-    li{
-        width: var(--latime-buton);
-        height: var(--inaltime-meniu);
-        border: 1px solid var(--culoare-background);
-        box-sizing: border-box;
-        text-align: center;
-        font-weight: bold;
-        line-height: var(--inaltime-meniu);
-        transition: all 1s linear;
+      display: none;
+      padding: 0;
+      transform: scaleY(0);
+      transform-origin: top;
+      animation: none;
+      transition: transform var(--durata-animatie) ease,
+        opacity var(--durata-animatie) ease;
+      opacity: 0;
 
-        &:hover{
-            background-color: var(--culoare-background);
+      li {
+        position: relative;
 
-            ul{
-                display: block;
-                background-color: var(--culoare-deschisa);
-                position: relative;
-                list-style-type: none;
-                left: -1px;
-            }
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          width: var(--px-mic);
+          height: 0;
+          transition: height 0.5s ease;
         }
+
+        &::before {
+          left: 0;
+          background: linear-gradient(
+            to right,
+            var(--culoare-text),
+            var(--culoare2)
+          );
+        }
+
+        &::after {
+          right: 0;
+          background: linear-gradient(
+            to left,
+            var(--culoare-text),
+            var(--culoare2)
+          );
+        }
+
+        &:hover {
+          &::before,
+          &::after {
+            height: 100%;
+          }
+        }
+      }
     }
-}
+  }
 
-ul.meniu li:hover >a,ul.meniu li:hover >div{
-    color: white;
-    
-}
-
-ul.meniu a,ul.meniu div{
-    color: black;
+  > li > a,
+  > li > div {
+    font-size: inherit;
+    transition: transform 0.5s ease;
+    color: var(--culoare-text);
     text-decoration: none;
-    transition: all 1s linear;
     display: block;
     height: 100%;
     cursor: pointer;
-}
-
-ul.meniu ul{
-    animation-name: animatie_submeniu;
-    animation-timing-function: linear;
-    animation-iteration-count: 3;
-    animation-duration: 0.75s;
-    animation-fill-mode: forwards;
-    transform-origin: 50% 0;
-}
-
-@keyframes animatie_submeniu{
-    0%{
-        opacity: 0;
-        transform: scaleY(0);
-    }
-    100%{
-        opacity: 1;
-        transform: scaleY(100%);
-    }
+  }
 }

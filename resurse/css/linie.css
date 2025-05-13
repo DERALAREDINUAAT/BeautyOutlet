@@ -1,0 +1,56 @@
+.linie-decorativa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2em auto;
+  width: 80%;
+  position: relative;
+}
+
+.linie-decorativa .linie {
+  flex-grow: 1;
+  height: 2px;
+  background: #444;
+  position: relative;
+  z-index: 0;
+}
+
+.linie-decorativa .capat-stanga,
+.linie-decorativa .capat-dreapta {
+  font-size: 2em;
+  line-height: 1;
+  color: #444;
+  position: absolute;
+  z-index: 1; 
+}
+
+
+.linie-decorativa .capat-stanga {
+  top: -0.17em;
+  left: -0.4em;
+}
+
+.linie-decorativa .capat-dreapta {
+  bottom: -0.1em;
+  right: -0.4em;
+}
+
+.linie-decorativa .capat-stanga::after,
+.linie-decorativa .capat-dreapta::after {
+  content: attr(data-reflexie);
+  font-size: 1em;
+  color: #444;
+  position: absolute;
+}
+
+.linie-decorativa .capat-stanga::after {
+  top: -0.6em; 
+  left: 0;
+  transform: scaleY(-1);
+}
+
+.linie-decorativa .capat-dreapta::after {
+  bottom: -0.75em;
+  right: 0;
+  transform: scaleY(-1);
+}

@@ -1,0 +1,27 @@
+#container-reflexie {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#text,
+#text-reflectat {
+  font-size: 50px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+#text-reflectat {
+  transform: scaleX(-1);
+  opacity: 0.5;
+  margin-left: 20px;
+  color: inherit; /* moștenește culoarea de la container */
+}
+
+#container-reflexie {
+  color: rgb(4, 44, 4); /* culoare implicită */
+}
+
+#container-reflexie:hover {
+  color: rgb(78, 124, 78); /* se aplică la ambele texte prin inherit */
+}

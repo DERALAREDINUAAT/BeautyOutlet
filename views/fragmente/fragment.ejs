@@ -1,22 +1,42 @@
 <section id="galerie-statica">
     <div id="grid-galerie">
 
-        <% function obtineOraCurenta() { const ora=new Date().getHours(); return ora; } function
-            esteImagineVizibila(intervalTimp) { const oraCurenta=obtineOraCurenta(); const [oraInceput,
-            oraSfarsit]=intervalTimp.split('-'); const [oraInceputOra]=oraInceput.split(':'); const
-            [oraSfarsitOra]=oraSfarsit.split(':'); return oraCurenta>= parseInt(oraInceputOra) && oraCurenta <=
-                parseInt(oraSfarsitOra); } let cnt=0; for (let imagine of locals.imagini) { if (cnt===10) break; //
-                Verificăm dacă intervalul de timp al imaginii se potrivește cu ora curentă if
-                (esteImagineVizibila(imagine.timp)) { cnt++; %>
+        <% 
+        function obtineOraCurenta() {
+            const ora = new Date().getHours();
+            return ora;
+        }
+
+        function esteImagineVizibila(intervalTimp) {
+            const oraCurenta = obtineOraCurenta();
+            const [oraInceput, oraSfarsit] = intervalTimp.split('-');
+            const [oraInceputOra] = oraInceput.split(':');
+            const [oraSfarsitOra] = oraSfarsit.split(':');
+
+            return oraCurenta >= parseInt(oraInceputOra) && oraCurenta <= parseInt(oraSfarsitOra);
+        }
+
+        let cnt = 0;
+
+        for (let imagine of locals.imagini) {
+            if (cnt === 10) break;
+
+            // Verificăm dacă intervalul de timp al imaginii se potrivește cu ora curentă
+            if (esteImagineVizibila(imagine.timp)) {
+                cnt++;
+        %>
 
                 <figure>
                     <figcaption><%- imagine.titlu %></figcaption>
                     <source srcset="<%- imagine.cale_imagine %>" media="screen and (max-width:1000px)" />
-                    <img src="<%- imagine.cale_imagine %>" title="<%- imagine.descriere %>"
-                        alt="<%- imagine.descriere %>">
+                    <img src="<%- imagine.cale_imagine %>" title="<%- imagine.descriere %>" alt="<%- imagine.descriere %>">
                 </figure>
 
-                <% } } %>
+        <%
+            }
+        }
+        %>
 
     </div>
 </section>
+

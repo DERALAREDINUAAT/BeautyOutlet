@@ -2,6 +2,7 @@ const express= require("express");
 const path= require("path");
 const fs= require("fs");
 const sharp=require("sharp");
+const sass=require("sass");
 const pg=require("pg");
 
 const Client=pg.Client;
@@ -45,17 +46,69 @@ console.log("Folderul proiectului","__dirname")
 console.log("Cale fisier index.js:","__filename")
 console.log("Folderul de lucru:",process.cwd())
 
-let obGlobal={
+obGlobal={
     obErori:null,
-    obImagini:null
+    obImagini:null,
+    folderScss: path.join(__dirname,"resurse/scss"),
+    folderCss: path.join(__dirname,"resurse/css"),
+    folderBackup: path.join(__dirname,"backup"),
+    optiuniMeniu:null
 }
 
-const vect_foldere=["temp", "backup", "temp1"]
+vect_foldere=["temp", "backup", "temp1"]
 for(let folder of vect_foldere){
     let caleFolder=path.join(__dirname,folder)
     if(! fs.existsSync(caleFolder)){
     fs.mkdirSync(caleFolder)}
 }
+
+function compileazaScss(caleScss, caleCss){
+    console.log("cale:",caleCss);
+    if(!caleCss){
+
+        let numeFisExt=path.basename(caleScss); // "folder1/folder2/ceva.txt" -> "ceva.txt"
+        let numeFis=numeFisExt.split(".")[0]   /// "a.scss"  -> ["a","scss"]
+        caleCss=numeFis+".css"; // output: a.css
+    }
+    
+    if (!path.isAbsolute(caleScss))
+        caleScss=path.join(obGlobal.folderScss,caleScss )
+    if (!path.isAbsolute(caleCss))
+        caleCss=path.join(obGlobal.folderCss,caleCss )
+    let caleBackup=path.join(obGlobal.folderBackup, "resurse/css");
+    if (!fs.existsSync(caleBackup)) {
+        fs.mkdirSync(caleBackup,{recursive:true})
+    }
+    
+    // la acest punct avem cai absolute in caleScss si  caleCss
+
+    let numeFisCss=path.basename(caleCss);
+    if (fs.existsSync(caleCss)){
+        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, "resurse/css",numeFisCss ))// +(new Date()).getTime()
+    }
+    rez=sass.compile(caleScss, {"sourceMap":true});
+    fs.writeFileSync(caleCss,rez.css)
+    // console.log("Compilare SCSS",rez);
+}
+//compileazaScss("a.scss");
+
+//la pornirea serverului
+vFisiere=fs.readdirSync(obGlobal.folderScss);
+for( let numeFis of vFisiere ){
+    if (path.extname(numeFis)==".scss"){
+        compileazaScss(numeFis);
+    }
+}
+
+fs.watch(obGlobal.folderScss, function(eveniment, numeFis){
+    console.log(eveniment, numeFis);
+    if (eveniment=="change" || eveniment=="rename"){
+        let caleCompleta=path.join(obGlobal.folderScss, numeFis);
+        if (fs.existsSync(caleCompleta)){
+            compileazaScss(caleCompleta);
+        }
+    }
+})
 
 function initErori(){
     let continut = fs.readFileSync(path.join(__dirname,"resurse/json/erori.json")).toString("utf-8");
@@ -176,7 +229,10 @@ app.get("/abc", function(req, res, next){
 app.get("/produse", function(req, res){
     console.log(req.query)
     var conditieQuery=""; // TO DO where din parametri
+    if (req.query.tip){
+        conditieQuery=` where tip_produs='${req.query.tip}'`
 
+    }
 
     queryOptiuni="select * from unnest(enum_range(null::categ_produse))"
     client.query(queryOptiuni, function(err, rezOptiuni){
@@ -194,6 +250,24 @@ app.get("/produse", function(req, res){
             }
         })
     });
+})
+
+app.get("/produs/:id", function(req, res){
+    console.log(req.params)
+    client.query(`select * from prajituri where id=${req.params.id}`, function(err, rez){
+        if (err){
+            console.log(err);
+            afisareEroare(res, 2);
+        }
+        else{
+            if (rez.rowCount==0){
+                afisareEroare(res, 404);
+            }
+            else{
+                res.render("pagini/produs", {prod: rez.rows[0]})
+            }
+        }
+    })
 })
 
 app.get(/^\/resurse\/[a-zA-Z0-9_\/]*$/, function(req, res, next){

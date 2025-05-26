@@ -5,13 +5,13 @@ const sharp = require("sharp");
 const sass = require("sass");
 const pg = require("pg");
 
-const formidable=require("formidable");
-const {Utilizator}=require("./module_proprii/utilizator.js")
-const session=require('express-session');
+const formidable = require("formidable");
+const { Utilizator } = require("./module_proprii/utilizator.js")
+const session = require('express-session');
 const Drepturi = require("./module_proprii/drepturi.js");
 
-const AccesBD=require("./module_proprii/accesbd.js")
-AccesBD.getInstanta().select({tabel:"produse", campuri:["*"]},function(err,rez){
+const AccesBD = require("./module_proprii/accesbd.js")
+AccesBD.getInstanta().select({ tabel: "produse", campuri: ["*"] }, function (err, rez) {
     console.log("-----------------Acces BD ---------------- ")
     console.log(err)
     console.log(rez)
@@ -67,10 +67,10 @@ obGlobal = {
     optiuniMeniu: null
 }
 
-client.query("select * from unnest(enum_range(null::tipuri_produse_cosmetice))", function(err, rezultat ){
-    console.log(err)    
+client.query("select * from unnest(enum_range(null::tipuri_produse_cosmetice))", function (err, rezultat) {
+    console.log(err)
     console.log("Tipuri produse:", rezultat)
-    obGlobal.optiuniMeniu=rezultat.rows
+    obGlobal.optiuniMeniu = rezultat.rows
 })
 
 vect_foldere = ["temp", "backup", "temp1", "poze_uploadate"]
@@ -133,7 +133,7 @@ function initErori() {
     let continut = fs.readFileSync(path.join(__dirname, "resurse/json/erori.json")).toString("utf-8");
 
     console.log(continut)
-    obGlobal.obErori=JSON.parse(continut)
+    obGlobal.obErori = JSON.parse(continut)
     console.log(obGlobal.obErori)
 
     obGlobal.obErori.eroare_default.imagine = path.join(obGlobal.obErori.cale_baza, obGlobal.obErori.eroare_default.imagine)
@@ -197,10 +197,10 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
     })
 }
 
-app.use("/*nume", function(req, res, next){
-    res.locals.optiuniMeniu=obGlobal.optiuniMeniu
+app.use("/*nume", function (req, res, next) {
+    res.locals.optiuniMeniu = obGlobal.optiuniMeniu
     next();
-} )
+})
 
 app.use("/resurse", express.static(path.join(__dirname, "resurse")))
 app.use("/node_modules", express.static(path.join(__dirname, "node_modules")))
@@ -251,7 +251,7 @@ app.get("/abc", function (req, res, next) {
     console.log("------------")
 })
 
-app.get("/produse", function (req, res) {
+app.get("/produse", async function (req, res) {
     console.log(req.query)
     var conditieQuery = ""; // TO DO where din parametri
     if (req.query.tip) {
@@ -264,17 +264,28 @@ app.get("/produse", function (req, res) {
         console.log(rezOptiuni)
 
 
-        queryProduse = "select * from produse" +conditieQuery
+        queryProduse = "select * from produse" + conditieQuery
         client.query(queryProduse, function (err, rez) {
             if (err) {
                 console.log(err);
                 afisareEroare(res, 2);
             }
             else {
-                res.render("pagini/produse", { produse: rez.rows, optiuni: rezOptiuni.rows })
+                res.render("pagini/produse", { produse: rez.rows, optiuni: rezOptiuni.rows, ingrediente: ingrediente })
             }
         })
     });
+    let ingredienteQuery = `
+    SELECT DISTINCT unnest(ingrediente) AS ing 
+    FROM produse 
+    WHERE ingrediente IS NOT NULL
+`;
+
+    let ingrediente = (await client.query(ingredienteQuery)).rows
+        .map(row => row.ing.trim())
+        .filter((val, index, self) => self.indexOf(val) === index)
+        .sort();
+
 })
 
 app.get("/produs/:id", function (req, res) {
@@ -296,82 +307,82 @@ app.get("/produs/:id", function (req, res) {
 })
 
 // ------------------------- utilizatori ---------------------------
-app.post("/inregistrare",function(req, res){
+app.post("/inregistrare", function (req, res) {
     var username;
     var poza;
-    var formular= new formidable.IncomingForm()
-    formular.parse(req, function(err, campuriText, campuriFisier ){//4
-        console.log("Inregistrare:",campuriText);
+    var formular = new formidable.IncomingForm()
+    formular.parse(req, function (err, campuriText, campuriFisier) {//4
+        console.log("Inregistrare:", campuriText);
         console.log(campuriFisier);
         console.log(poza, username);
-        var eroare="";
+        var eroare = "";
         // TO DO var utilizNou = creare utilizator
-        var utilizNou =new Utilizator();
-        try{
-            utilizNou.setareNume=campuriText.nume[0];
-            utilizNou.setareUsername=campuriText.username[0];
-            utilizNou.email=campuriText.email[0]
-            utilizNou.prenume=campuriText.prenume[0]
-          
-            utilizNou.parola=campuriText.parola[0];
-            utilizNou.culoare_chat=campuriText.culoare_chat[0];
-            utilizNou.poza= poza;
-            Utilizator.getUtilizDupaUsername(campuriText.username[0], {}, function(u, parametru ,eroareUser ){
-                if (eroareUser==-1){//nu exista username-ul in BD
+        var utilizNou = new Utilizator();
+        try {
+            utilizNou.setareNume = campuriText.nume[0];
+            utilizNou.setareUsername = campuriText.username[0];
+            utilizNou.email = campuriText.email[0]
+            utilizNou.prenume = campuriText.prenume[0]
+
+            utilizNou.parola = campuriText.parola[0];
+            utilizNou.culoare_chat = campuriText.culoare_chat[0];
+            utilizNou.poza = poza;
+            Utilizator.getUtilizDupaUsername(campuriText.username[0], {}, function (u, parametru, eroareUser) {
+                if (eroareUser == -1) {//nu exista username-ul in BD
                     //TO DO salveaza utilizator
                     utilizNou.salvareUtilizator()
                 }
-                else{
-                    eroare+="Mai exista username-ul";
+                else {
+                    eroare += "Mai exista username-ul";
                 }
-                if(!eroare){
-                    res.render("pagini/inregistrare", {raspuns:"Inregistrare cu succes!"})
-                  
+                if (!eroare) {
+                    res.render("pagini/inregistrare", { raspuns: "Inregistrare cu succes!" })
+
                 }
                 else
-                    res.render("pagini/inregistrare", {err: "Eroare: "+eroare});
+                    res.render("pagini/inregistrare", { err: "Eroare: " + eroare });
             })
-          
+
         }
-        catch(e){
+        catch (e) {
             console.log(e);
-            eroare+= "Eroare site; reveniti mai tarziu";
+            eroare += "Eroare site; reveniti mai tarziu";
             console.log(eroare);
-            res.render("pagini/inregistrare", {err: "Eroare: "+eroare})
+            res.render("pagini/inregistrare", { err: "Eroare: " + eroare })
         }
-  
+
     });
-    formular.on("field", function(nume,val){  // 1
-  
+    formular.on("field", function (nume, val) {  // 1
+
         console.log(`--- ${nume}=${val}`);
-      
-        if(nume=="username")
-            username=val;
+
+        if (nume == "username")
+            username = val;
     })
-    formular.on("fileBegin", function(nume,fisier){ //2
+    formular.on("fileBegin", function (nume, fisier) { //2
         console.log("fileBegin");
-      
-        console.log(nume,fisier);
+
+        console.log(nume, fisier);
         //TO DO adaugam folderul poze_uploadate ca static si sa fie creat de aplicatie
         //TO DO in folderul poze_uploadate facem folder cu numele utilizatorului (variabila folderUser)
-        var folderUser=path.join(__dirname, "poze_uploadate", username);
+        var folderUser = path.join(__dirname, "poze_uploadate", username);
         if (!fs.existsSync(folderUser))
             fs.mkdirSync(folderUser)
-      
-        fisier.filepath=path.join(folderUser, fisier.originalFilename)
-        poza=fisier.originalFilename;
+
+        fisier.filepath = path.join(folderUser, fisier.originalFilename)
+        poza = fisier.originalFilename;
         //fisier.filepath=folderUser+"/"+fisier.originalFilename
-        console.log("fileBegin:",poza)
-        console.log("fileBegin, fisier:",fisier)
-    })    
-    formular.on("file", function(nume,fisier){//3
+        console.log("fileBegin:", poza)
+        console.log("fileBegin, fisier:", fisier)
+    })
+    formular.on("file", function (nume, fisier) {//3
         console.log("file");
-        console.log(nume,fisier);
+        console.log(nume, fisier);
     });
 });
 
 //app.get(/^\/resurse\/[a-zA-Z0-9_\/]*$/, function (req, res, next) {
-  //  afisareEroare(res, 403);
+//  afisareEroare(res, 403);
 //})
 
 

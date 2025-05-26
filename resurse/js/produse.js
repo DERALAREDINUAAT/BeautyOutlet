@@ -43,6 +43,8 @@ window.onload = function () {
                 ingredienteSelectate.push(ch.value.toLowerCase());
             }
         }
+        let aplicaFiltruIngrediente = document.getElementById("ignore-ingrediente").checked;
+
         let valVegan = "toate";
         for (let red of vectRadio) {
             if (red.checked) {
@@ -50,6 +52,9 @@ window.onload = function () {
                 break;
             }
         }
+
+        let selectTip = document.getElementById("inp-tip");
+        let valoriTip = Array.from(selectTip.selectedOptions).map(opt => opt.value);
 
         for (let prod of produse) {
             prod.style.display = "none";
@@ -70,12 +75,14 @@ window.onload = function () {
             let descriere = prod.getElementsByClassName("val-descriere")[0].innerHTML.trim().toLowerCase();
             let cond5 = cuvinteCheie.length == 0 || cuvinteCheie.some(cuv => descriere.includes(cuv));
 
-            let ingredienteProdus = prod.getElementsByClassName("val-ingrediente")[0].innerHTML.trim().toLowerCase().split(",");
-            ingredienteProdus = ingredienteProdus.map(i => i.trim());
+            let ingredienteRaw = prod.getElementsByClassName("val-ingrediente")[0].innerHTML.trim().toLowerCase();
+            let ingredienteProdus = ingredienteRaw ? ingredienteRaw.split(",").map(i => i.trim()) : [];
+            let cond6 = !aplicaFiltruIngrediente || ingredienteSelectate.length == 0 || ingredienteProdus.some(i => ingredienteSelectate.includes(i));
 
-            let cond6 = ingredienteSelectate.length == 0 || ingredienteProdus.some(i => ingredienteSelectate.includes(i));
+            let tipProdus = prod.getElementsByClassName("val-tip")[0].innerHTML.trim().toLowerCase();
+            let cond7 = valoriTip.length === 0 || valoriTip.includes(tipProdus);
 
-            if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6) {
+            if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7) {
                 prod.style.display = "block";
             }
         }
@@ -87,7 +94,13 @@ window.onload = function () {
     }
 
     document.getElementById("resetare").onclick = function () {
+        if (!confirm("Sigur vrei să resetezi toate filtrele?")) {
+        return;
+        }
         document.getElementById("inp-nume").value = ""
+        document.getElementById("inp-descriere").value = "";
+
+        
 
         let produse = document.getElementsByClassName("produs")
 

@@ -16,15 +16,12 @@
   opacity: 0.5;
   margin-left: 20px;
   color: inherit;
-  /* moștenește culoarea de la container */
 }
 
 #container-reflexie {
   color: rgb(4, 44, 4);
-  /* culoare implicită */
 }
 
 #container-reflexie:hover {
   color: rgb(78, 124, 78);
-  /* se aplică la ambele texte prin inherit */
 }

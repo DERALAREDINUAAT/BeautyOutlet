@@ -36,4 +36,74 @@ window.onload = function () {
             }
         }
     }
+
+    document.getElementById("inp-pret").onchange=function(){
+        document.getElementById("infoRange").innerHTML=`(${this.value})`
+    }
+
+    document.getElementById("resetare").onclick=function(){
+        document.getElementById("inp-nume").value=""
+
+        let produse= document.getElementsByClassName("produs")
+
+        document.getElementById("i_rad4").checked=true;
+
+        for (let prod of produse){
+            prod.style.display="block";
+        }
+    }
+    document.getElementById("sortCrescNume").onclick=function(){
+        sorteaza(1)
+    }
+    document.getElementById("sortDescrescNume").onclick=function(){
+        sorteaza(-1)
+    }
+
+    function sorteaza(semn){
+        let produse= document.getElementsByClassName("produs");
+        let vProduse= Array.from(produse);
+        vProduse.sort(function(a,b){ // a si b sunt <article>
+            let pretA=parseFloat(a.getElementsByClassName("val-pret")[0].innerHTML.trim())
+            let pretB=parseFloat(b.getElementsByClassName("val-pret")[0].innerHTML.trim())
+            if (pretA!=pretB){
+                return semn*(pretA-pretB)
+            }
+            // aici pretA==pretB
+            let numeA=a.getElementsByClassName("val-nume")[0].innerHTML.trim().toLowerCase()
+            let numeB=b.getElementsByClassName("val-nume")[0].innerHTML.trim().toLowerCase()
+            return semn*numeA.localeCompare(numeB)
+        })
+        for (let prod of vProduse){
+            prod.parentNode.appendChild(prod);
+        }
+
+    }
+
+
+    window.onkeydown=function(e){
+        console.log(e)
+        if (e.key=="c" && e.altKey){
+            let produse= document.getElementsByClassName("produs")
+            sumaPreturi=0
+            for (let prod of produse){
+                if(prod.style.display!="none"){
+                    let pret=parseFloat(prod.getElementsByClassName("val-pret")[0].innerHTML.trim())
+                    sumaPreturi+=pret
+                }
+            }
+            if(!document.getElementById("suma_preturi")){
+                let pRezultat=document.createElement("p") //<p></p>
+                pRezultat.innerHTML=sumaPreturi //<p>sumaPreturi</p>
+                pRezultat.id="suma_preturi"
+                let p= document.getElementById("p-suma")
+                p.parentNode.insertBefore(pRezultat, p.nextElementSibling)
+                setTimeout(function(){
+                    let p1=document.getElementById("suma_preturi")
+                    if(p1){
+                        p1.remove()
+                    }
+                }, 2000)
+            }
+        }
+    }
 }

@@ -1,2 +1,47 @@
-@use '../../node_modules/bootstrap/scss/bootstrap.scss' with ($primary: red,
-    $secondary: purple)
+@use "../../node_modules/bootstrap/scss/bootstrap.scss" as bs with (
+  $primary: green,
+  $secondary: rgb(8, 68, 8),
+  $body-bg: #f8f9fa,
+  $font-family-base: 'Times New Roman',
+  $border-radius: 1rem,
+);
+
+
+$btn-primary-color: #ffffff;  
+$btn-primary-bg: hsl(138, 100%, 64%);     
+$headings-font-size: 2rem;
+$font-size-base: 1rem;
+
+$border-radius-local: bs.$border-radius;
+
+h1 {
+  font-size: $headings-font-size;
+}
+
+body {
+  font-size: $font-size-base;
+}
+
+.btn-primary {
+  color: $btn-primary-color;
+  background-color: $btn-primary-bg;
+  border-radius: $border-radius-local;
+}
+
+@media (min-width: 768px) {
+  body {
+    background-color: #fff0f5;
+  }
+  h1 {
+    font-size: 2.5rem; 
+  }
+}
+
+@media (min-width: 1200px) { 
+  body {
+    background-color: #f0fff0; 
+  }
+  h1 {
+    font-size: 3rem; 
+  }
+}

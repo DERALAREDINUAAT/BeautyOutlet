@@ -5,6 +5,18 @@ const sharp = require("sharp");
 const sass = require("sass");
 const pg = require("pg");
 
+const formidable=require("formidable");
+const {Utilizator}=require("./module_proprii/utilizator.js")
+const session=require('express-session');
+const Drepturi = require("./module_proprii/drepturi.js");
+
+const AccesBD=require("./module_proprii/accesbd.js")
+AccesBD.getInstanta().select({tabel:"produse", campuri:["*"]},function(err,rez){
+    console.log("-----------------Acces BD ---------------- ")
+    console.log(err)
+    console.log(rez)
+})
+
 const Client = pg.Client;
 
 client = new Client({
@@ -16,13 +28,13 @@ client = new Client({
 })
 
 client.connect()
-client.query("select * from prajituri", function (err, rezultat) {
+client.query("select * from produse", function (err, rezultat) {
     console.log(err)
     console.log(rezultat)
 })
-client.query("select * from unnest(enum_range(null::categ_prajitura))", function (err, rezultat) {
+client.query("select * from unnest(enum_range(null::categ_produs))", function (err, rezultat) {
     console.log(err)
-    console.log(rezultat)
+    console.log("Rezultat query:", rezultat)
 })
 
 app = express();
@@ -55,7 +67,13 @@ obGlobal = {
     optiuniMeniu: null
 }
 
-vect_foldere = ["temp", "backup", "temp1"]
+client.query("select * from unnest(enum_range(null::tipuri_produse_cosmetice))", function(err, rezultat ){
+    console.log(err)    
+    console.log("Tipuri produse:", rezultat)
+    obGlobal.optiuniMeniu=rezultat.rows
+})
+
+vect_foldere = ["temp", "backup", "temp1", "poze_uploadate"]
 for (let folder of vect_foldere) {
     let caleFolder = path.join(__dirname, folder)
     if (!fs.existsSync(caleFolder)) {
@@ -114,7 +132,9 @@ fs.watch(obGlobal.folderScss, function (eveniment, numeFis) {
 function initErori() {
     let continut = fs.readFileSync(path.join(__dirname, "resurse/json/erori.json")).toString("utf-8");
 
-    obGlobal.obErori = JSON.parse(continut)
+    console.log(continut)
+    obGlobal.obErori=JSON.parse(continut)
+    console.log(obGlobal.obErori)
 
     obGlobal.obErori.eroare_default.imagine = path.join(obGlobal.obErori.cale_baza, obGlobal.obErori.eroare_default.imagine)
     for (let eroare of obGlobal.obErori.info_erori) {
@@ -177,6 +197,10 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
     })
 }
 
+app.use("/*nume", function(req, res, next){
+    res.locals.optiuniMeniu=obGlobal.optiuniMeniu
+    next();
+} )
 
 app.use("/resurse", express.static(path.join(__dirname, "resurse")))
 app.use("/node_modules", express.static(path.join(__dirname, "node_modules")))
@@ -235,12 +259,12 @@ app.get("/produse", function (req, res) {
 
     }
 
-    queryOptiuni = "select * from unnest(enum_range(null::categ_produse))"
+    queryOptiuni = "select * from unnest(enum_range(null::categ_produs))"
     client.query(queryOptiuni, function (err, rezOptiuni) {
         console.log(rezOptiuni)
 
 
-        queryProduse = "select * from produse"
+        queryProduse = "select * from produse" +conditieQuery
         client.query(queryProduse, function (err, rez) {
             if (err) {
                 console.log(err);
@@ -255,7 +279,7 @@ app.get("/produse", function (req, res) {
 
 app.get("/produs/:id", function (req, res) {
     console.log(req.params)
-    client.query(`select * from prajituri where id=${req.params.id}`, function (err, rez) {
+    client.query(`select * from produse where id=${req.params.id}`, function (err, rez) {
         if (err) {
             console.log(err);
             afisareEroare(res, 2);
@@ -271,9 +295,84 @@ app.get("/produs/:id", function (req, res) {
     })
 })
 
-app.get(/^\/resurse\/[a-zA-Z0-9_\/]*$/, function (req, res, next) {
-    afisareEroare(res, 403);
-})
+// ------------------------- utilizatori ---------------------------
+app.post("/inregistrare",function(req, res){
+    var username;
+    var poza;
+    var formular= new formidable.IncomingForm()
+    formular.parse(req, function(err, campuriText, campuriFisier ){//4
+        console.log("Inregistrare:",campuriText);
+        console.log(campuriFisier);
+        console.log(poza, username);
+        var eroare="";
+        // TO DO var utilizNou = creare utilizator
+        var utilizNou =new Utilizator();
+        try{
+            utilizNou.setareNume=campuriText.nume[0];
+            utilizNou.setareUsername=campuriText.username[0];
+            utilizNou.email=campuriText.email[0]
+            utilizNou.prenume=campuriText.prenume[0]
+          
+            utilizNou.parola=campuriText.parola[0];
+            utilizNou.culoare_chat=campuriText.culoare_chat[0];
+            utilizNou.poza= poza;
+            Utilizator.getUtilizDupaUsername(campuriText.username[0], {}, function(u, parametru ,eroareUser ){
+                if (eroareUser==-1){//nu exista username-ul in BD
+                    //TO DO salveaza utilizator
+                    utilizNou.salvareUtilizator()
+                }
+                else{
+                    eroare+="Mai exista username-ul";
+                }
+                if(!eroare){
+                    res.render("pagini/inregistrare", {raspuns:"Inregistrare cu succes!"})
+                  
+                }
+                else
+                    res.render("pagini/inregistrare", {err: "Eroare: "+eroare});
+            })
+          
+        }
+        catch(e){
+            console.log(e);
+            eroare+= "Eroare site; reveniti mai tarziu";
+            console.log(eroare);
+            res.render("pagini/inregistrare", {err: "Eroare: "+eroare})
+        }
+  
+    });
+    formular.on("field", function(nume,val){  // 1
+  
+        console.log(`--- ${nume}=${val}`);
+      
+        if(nume=="username")
+            username=val;
+    })
+    formular.on("fileBegin", function(nume,fisier){ //2
+        console.log("fileBegin");
+      
+        console.log(nume,fisier);
+        //TO DO adaugam folderul poze_uploadate ca static si sa fie creat de aplicatie
+        //TO DO in folderul poze_uploadate facem folder cu numele utilizatorului (variabila folderUser)
+        var folderUser=path.join(__dirname, "poze_uploadate", username);
+        if (!fs.existsSync(folderUser))
+            fs.mkdirSync(folderUser)
+      
+        fisier.filepath=path.join(folderUser, fisier.originalFilename)
+        poza=fisier.originalFilename;
+        //fisier.filepath=folderUser+"/"+fisier.originalFilename
+        console.log("fileBegin:",poza)
+        console.log("fileBegin, fisier:",fisier)
+    })    
+    formular.on("file", function(nume,fisier){//3
+        console.log("file");
+        console.log(nume,fisier);
+    });
+});
+
+//app.get(/^\/resurse\/[a-zA-Z0-9_\/]*$/, function (req, res, next) {
+  //  afisareEroare(res, 403);
+//})
 
 
 app.get("/*nume.ejs", function (req, res, next) {

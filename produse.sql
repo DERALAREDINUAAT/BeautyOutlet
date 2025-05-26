@@ -38,3 +38,23 @@ INSERT INTO produse (nume, descriere, pret, cantitate_ml, tip_produs, categorie,
 ('Ser regenerant “Timp în sticlă”', 'Nu oprește timpul, dar îți dă iluzia că ai putea.', 145.00, 30, 'skincare', 'exclusiv', '{"retinol","acid hialuronic","extract de trandafir"}', False, 'ser-timp.jpg'),
 
 ('Parfum “Plimbare de vară”', 'Ușor, floral, și cu miros de vacanță.', 89.00, 75, 'parfum', 'clasic', '{"citronella","iasomie","bergamota"}', True, 'parfum-vara.jpg');
+
+('Cremă de zi „Lumina matinală”', 'Hrănitoare și ușoară, perfectă pentru dimineți grăbite.', 67.50, 50, 'skincare', 'noutate', '{"aloe vera","vitamina C","ulei de măsline"}', True, 'crema-lumina.jpg'),
+
+('Balsam pentru păr „Catifelare”', 'Pentru un păr care se descurcă singur. La propriu.', 29.99, 200, 'ingrijire_par', 'best seller', '{"keratina","ulei de cocos"}', True, 'balsam-catifelare.jpg'),
+
+('Trusă de machiaj „Noir Deluxe”', 'Culori intense, pentru nopți pe măsură.', 139.00, NULL, 'machiaj', 'exclusiv', '{"pigmenti","mica","ulei de ricin"}', False, 'trusa-noir.jpg'),
+
+('Apă micelară „Purificare”', 'Curăță machiajul, impuritățile și... regretele.', 38.90, 150, 'skincare', 'clasic', '{"apa florala","glicerina","extract de castravete"}', True, 'apa-micelara.jpg'),
+
+('Accesoriu: Oglindă de buzunar „Reflexie”', 'Oglinda nu minte. Doar amplifică.', 19.00, NULL, 'accesoriu', 'travel size', NULL, False, 'oglinda-reflexie.jpg'),
+
+('Set unghii „Perfect Finish”', 'Tot ce ai nevoie pentru unghii demne de poză.', 59.00, NULL, 'accesoriu', 'promotie', '{"pile","forfecuță","mini-lac"}', False, 'set-unghii.jpg'),
+
+('Spray de corp „Zori de vară”', 'Ușor, floral, și persistent cât trebuie.', 45.00, 100, 'parfum', 'clasic', '{"iasomie","lămâie","ceai verde"}', True, 'spray-zori.jpg'),
+
+('Pudră iluminatoare „GlowDust”', 'Pentru când vrei să strălucești... la propriu.', 55.00, 20, 'machiaj', 'noutate', '{"mica","praf de perle"}', False, 'pudra-glow.jpg'),
+
+('Set contur ochi „Privire proaspătă”', 'Ascunde orele nedormite sub 5ml de magie.', 88.00, 15, 'skincare', 'exclusiv', '{"acid hialuronic","cofeină","extract de albăstrele"}', True, 'set-ochi.jpg'),
+
+('Rimel colorat „Electric Blue”', 'Un strop de nebunie la fiecare clipire.', 39.90, 9, 'machiaj', 'best seller', '{"pigmenti","ulei de ricin","apa"}', False, 'rimel-electric.jpg');

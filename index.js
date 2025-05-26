@@ -259,35 +259,67 @@ app.get("/produse", async function (req, res) {
 
     }
 
-    queryOptiuni = "select * from unnest(enum_range(null::categ_produs))"
-    client.query(queryOptiuni, function (err, rezOptiuni) {
-        console.log(rezOptiuni)
-
-
-        queryProduse = "select * from produse" + conditieQuery
-        client.query(queryProduse, function (err, rez) {
-            if (err) {
-                console.log(err);
-                afisareEroare(res, 2);
-            }
-            else {
-                res.render("pagini/produse", { produse: rez.rows, optiuni: rezOptiuni.rows, ingrediente: ingrediente })
-            }
-        })
-    });
     let ingredienteQuery = `
     SELECT DISTINCT unnest(ingrediente) AS ing 
     FROM produse 
     WHERE ingrediente IS NOT NULL
-`;
+    `;
 
-    let ingrediente = (await client.query(ingredienteQuery)).rows
-        .map(row => row.ing.trim())
-        .filter((val, index, self) => self.indexOf(val) === index)
-        .sort();
+    let queryCulori = `SELECT DISTINCT culoare FROM produse WHERE culoare IS NOT NULL`;
 
+    client.query(ingredienteQuery, function (errIng, rezIng) {
+        if (errIng) {
+            console.log("Eroare ingrediente:", errIng);
+            afisareEroare(res, 500);
+            return;
+        }
+        let ingrediente = rezIng.rows
+            .map(row => row.ing.trim())
+            .filter((val, index, self) => self.indexOf(val) === index)
+            .sort();
+
+        client.query(queryCulori, function (errCulori, rezCulori) {
+            if (errCulori) {
+                console.log("Eroare culori:", errCulori);
+                afisareEroare(res, 500);
+                return;
+            }
+            let culori = rezCulori.rows.map(c => c.culoare);
+
+            queryOptiuni = "select * from unnest(enum_range(null::categ_produs))"
+            client.query(queryOptiuni, function (err, rezOptiuni) {
+                console.log(rezOptiuni)
+
+
+                queryProduse = "select * from produse" + conditieQuery
+                client.query(queryProduse, function (err, rez) {
+                    if (err) {
+                        console.log(err);
+                        afisareEroare(res, 2);
+                    }
+                    else {
+                        let luni = ["Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
+    "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"];
+let zile = ["Duminică", "Luni", "Marți", "Miercuri", "Joi", "Vineri", "Sâmbătă"];
+
+// adaugăm câmp nou pentru fiecare produs
+rez.rows.forEach(p => {
+    let data = new Date(p.data_adaugare);
+    p.data_formatata = `${data.getDate()}(${zile[data.getDay()]})/${luni[data.getMonth()]}/${data.getFullYear()}`;
+});
+
+res.render("pagini/produse", {
+    produse: rez.rows,
+    optiuni: rezOptiuni.rows,
+    ingrediente: ingrediente,
+    culori: culori
+});
+}
+                })
+            });
+        })
+    })
 })
-
 app.get("/produs/:id", function (req, res) {
     console.log(req.params)
     client.query(`select * from produse where id=${req.params.id}`, function (err, rez) {

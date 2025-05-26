@@ -68,6 +68,14 @@
                 </label></p>
         </div>
 
+        <label for="inp-culoare">Culoare:</label>
+        <select id="inp-culoare" multiple>
+            <% for (let culoare of culori) { %>
+                <option value="<%= culoare.toLowerCase() %>">
+                    <%= culoare %>
+                </option>
+                <% } %>
+        </select>
 
         <label> Pret minim: <input type="range" id="inp-pret" value="0" min="0" max="70"> <span
                 id="infoRange">(0)</span></label>
@@ -96,12 +104,17 @@
             <h2>Produse</h2>
             <div class="grid-produse">
                 <% for( let prod of locals.produse) { %>
-                    <article class="produs">
+                    <article class="produs <%= prod.categorie.replace(/\s/g, '') %>" id="ent<%= prod.id %>">
                         <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%-
                                         prod.nume%></span></a></h3>
                         <div class="info-prod">
                             <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
                             <p class="cantitate">Cantitate: <span class="val-cantitate"><%- prod.cantitate_ml %></span>
+                            </p>
+                            <p>Adăugat în ofertă la:
+                                <time datetime="<%= prod.data_adaugare.toISOString() %>">
+                                    <%= prod.data_formatata %>
+                                </time>
                             </p>
                             <p class="vegan">Vegan: <span class="val-vegan"><%- prod.vegan %></span></p>
                         </div>
@@ -115,6 +128,9 @@
                         <p class=" categorie">Categorie: <span class="val-categorie"><%- prod.categorie%></span>
                                 <p class="tip">Tip produs: <span class="val-tip">
                                         <%= prod.tip_produs %>
+                                    </span></p>
+                                <p class="culoare">Culoare: <span class="val-culoare">
+                                        <%= prod.culoare || "nespecificat" %>
                                     </span></p>
                         </p>
                         <label class="selecteaza-cos">

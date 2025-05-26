@@ -20,7 +20,16 @@ window.onload = function () {
     btn = document.getElementById("filtrare");
     btn.onclick = function () {
         //this.btn.classList.add("selectat");
-        let inpNume = document.getElementById("inp-nume").value.trim().toLowerCase();
+        let inpNume = document.getElementById("inp-nume");
+        let valNume = inpNume.value.trim().toLowerCase();
+
+        if (!/^[a-zăâîșț\s]*$/i.test(valNume)) {
+            inpNume.classList.add("is-invalid");
+            alert("Numele nu trebuie să conțină cifre sau caractere speciale.");
+            return;
+        } else {
+            inpNume.classList.remove("is-invalid");
+        }
         let inpPret = document.getElementById("inp-pret").value
         let inpCategorie = document.getElementById("inp-categorie").value.trim().toLowerCase();
         let produse = document.getElementsByClassName("produs")
@@ -53,14 +62,19 @@ window.onload = function () {
             }
         }
 
+        let inpCuloare = document.getElementById("inp-culoare").value.trim().toLowerCase();
+
         let selectTip = document.getElementById("inp-tip");
         let valoriTip = Array.from(selectTip.selectedOptions).map(opt => opt.value);
+        let selectCuloare = document.getElementById("inp-culoare");
+        let valoriCulori = Array.from(selectCuloare.selectedOptions).map(opt => opt.value);
+
 
         for (let prod of produse) {
             prod.style.display = "none";
 
             let nume = prod.getElementsByClassName("val-nume")[0].innerHTML.trim().toLowerCase();
-            let cond1 = nume.startsWith(inpNume);
+            let cond1 = nume.includes(valNume);
 
             let vegan = prod.getElementsByClassName("val-vegan")[0].innerHTML.trim().toLowerCase();
             let cond2 = (valVegan == "toate" || vegan == valVegan);
@@ -82,7 +96,10 @@ window.onload = function () {
             let tipProdus = prod.getElementsByClassName("val-tip")[0].innerHTML.trim().toLowerCase();
             let cond7 = valoriTip.length === 0 || valoriTip.includes(tipProdus);
 
-            if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7) {
+            let culoare = prod.getElementsByClassName("val-culoare")[0]?.innerHTML.trim().toLowerCase();
+            let cond8 = valoriCulori.length === 0 || valoriCulori.includes(culoare);
+
+            if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7 && cond8) {
                 prod.style.display = "block";
             }
         }
@@ -95,12 +112,12 @@ window.onload = function () {
 
     document.getElementById("resetare").onclick = function () {
         if (!confirm("Sigur vrei să resetezi toate filtrele?")) {
-        return;
+            return;
         }
         document.getElementById("inp-nume").value = ""
         document.getElementById("inp-descriere").value = "";
 
-        
+
 
         let produse = document.getElementsByClassName("produs")
 
@@ -126,10 +143,13 @@ window.onload = function () {
             if (pretA != pretB) {
                 return semn * (pretA - pretB)
             }
-            // aici pretA==pretB
-            let numeA = a.getElementsByClassName("val-nume")[0].innerHTML.trim().toLowerCase()
-            let numeB = b.getElementsByClassName("val-nume")[0].innerHTML.trim().toLowerCase()
-            return semn * numeA.localeCompare(numeB)
+            let ingA = a.getElementsByClassName("val-ingrediente")[0].innerHTML.trim();
+            let ingB = b.getElementsByClassName("val-ingrediente")[0].innerHTML.trim();
+
+            let nrIngA = ingA ? ingA.split(",").length : 0;
+            let nrIngB = ingB ? ingB.split(",").length : 0;
+
+            return semn * (nrIngA - nrIngB);
         })
         for (let prod of vProduse) {
             prod.parentNode.appendChild(prod);

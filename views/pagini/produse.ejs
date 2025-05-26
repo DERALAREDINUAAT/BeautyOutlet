@@ -2,7 +2,7 @@
 <html lang="ro">
 
 <head>
-<meta name="keywords" content="outlet cosmetice, reduceri parfumuri, oferte speciale, produse beauty ieftine">
+    <meta name="keywords" content="outlet cosmetice, reduceri parfumuri, oferte speciale, produse beauty ieftine">
     <meta name="description"
         content="Descoperă cele mai bune oferte la cosmetice și parfumuri în outlet-ul nostru online!">
     <title>BeautyOutlet</title>
@@ -19,24 +19,38 @@
     <header class="c1" id="titlu">
         <title>BeautyOutlet - Reduceri Cosmetice & Parfumuri</title>
         <%- include("../fragmente/header") %>
+            <button id="btn-tema" title="Schimbă tema">
+                <i class="fa fa-moon"></i>
+            </button>
     </header>
 
     <main>
         <label> Nume: <input type="text" id="inp-nume"></label>
         <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
-        <div> Calorii:<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-            <p><label>Dietetic (calorii &lt; 350)
-                    <input id="i_rad1" name="gr_rad" value="0:350" type="radio" />
+        <div class="mb-3">
+            <label for="inp-descriere" class="form-label">Cuvinte cheie în descriere</label>
+            <textarea class="form-control" id="inp-descriere" placeholder="ex: catifelare, aroma, floral"
+                rows="2"></textarea>
+        </div>
+
+        <fieldset>
+            <legend>Alege ingrediente:</legend>
+            <label><input type="checkbox" name="ingredient" value="miere" checked> Miere</label>
+            <label><input type="checkbox" name="ingredient" value="lapte" checked> Lapte</label>
+            <label><input type="checkbox" name="ingredient" value="trandafir" checked> Trandafir</label>
+            <label><input type="checkbox" name="ingredient" value="vanilie" checked> Vanilie</label>
+        </fieldset>
+
+        <div>Vegan:
+            <p><label>Da
+                    <input type="radio" name="gr_vegan" value="true" />
                 </label></p>
-            <p><label>Mediu (350 &le; calorii &lt; 700)
-                    <input id="i_rad2" name="gr_rad" value="350:700" type="radio" />
-                </label>
-            <p><label>Ridicat caloric (700 &le; calorii)
-                    <input id="i_rad3" name="gr_rad" value="700:1000000000" type="radio" />
-                </label>
+            <p><label>Nu
+                    <input type="radio" name="gr_vegan" value="false" />
+                </label></p>
             <p><label>Toate
-                    <input id="i_rad4" checked name="gr_rad" value="toate" type="radio" />
-                </label>
+                    <input type="radio" name="gr_vegan" value="toate" checked />
+                </label></p>
         </div>
 
 
@@ -72,14 +86,17 @@
                                         prod.nume%></span></a></h3>
                         <div class="info-prod">
                             <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
-                            <p class="cantitate">Cantitate: <span class="val-cantitate"><%- prod.cantitate_ml %></span></p>
+                            <p class="cantitate">Cantitate: <span class="val-cantitate"><%- prod.cantitate_ml %></span>
+                            </p>
                             <p class="vegan">Vegan: <span class="val-vegan"><%- prod.vegan %></span></p>
                         </div>
-                        <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
                         <figure>
                             <a href="/produs/<%-prod.id %>"><img src="/resurse/imagini/produse/<%- prod.imagine %>"
                                     style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
                         </figure>
+                        <p class="val-descriere"><%- prod.descriere %></p>
+                        <p class="val-ingrediente"><%- prod.ingrediente %></p>
+                        <p class="categorie">Categorie: <span class="val-categorie"><%- prod.categorie%></span></p>
                         <label class="selecteaza-cos">
                             Selectează:<br />
                             <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">

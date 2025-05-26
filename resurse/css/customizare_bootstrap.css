@@ -2447,7 +2447,7 @@ textarea.form-control-lg {
 
 .form-range {
   width: 100%;
-  height: 1.5rem;
+  height: 2rem;
   padding: 0;
   appearance: none;
   background-color: transparent;
@@ -2465,9 +2465,9 @@ textarea.form-control-lg {
   border: 0;
 }
 .form-range::-webkit-slider-thumb {
-  width: 1rem;
-  height: 1rem;
-  margin-top: -0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: -0.5rem;
   appearance: none;
   background-color: green;
   border: 0;
@@ -2487,13 +2487,13 @@ textarea.form-control-lg {
   height: 0.5rem;
   color: transparent;
   cursor: pointer;
-  background-color: var(--bs-secondary-bg);
+  background-color: #ccc;
   border-color: transparent;
   border-radius: 1rem;
 }
 .form-range::-moz-range-thumb {
-  width: 1rem;
-  height: 1rem;
+  width: 1.5rem;
+  height: 1.5rem;
   appearance: none;
   background-color: green;
   border: 0;
@@ -2513,7 +2513,7 @@ textarea.form-control-lg {
   height: 0.5rem;
   color: transparent;
   cursor: pointer;
-  background-color: var(--bs-secondary-bg);
+  background-color: #ccc;
   border-color: transparent;
   border-radius: 1rem;
 }

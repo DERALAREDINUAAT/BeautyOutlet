@@ -19,9 +19,12 @@
     <header class="c1" id="titlu">
         <title>BeautyOutlet - Reduceri Cosmetice & Parfumuri</title>
         <%- include("../fragmente/header") %>
-            <button id="btn-tema" title="Schimbă tema">
-                <i class="fa fa-moon"></i>
-            </button>
+            <div class="form-check form-switch d-flex align-items-center ms-2">
+                <input class="form-check-input" type="checkbox" id="switch-tema">
+                <label class="form-check-label ms-2" for="switch-tema">
+                    <i id="icon-tema" class="bi"></i>
+                </label>
+            </div>
     </header>
 
     <main>
@@ -41,13 +44,17 @@
         </div>
         <fieldset>
             <legend>Alege ingrediente:</legend>
-            <% for (let ing of locals.ingrediente) { %>
-                <label>
-                    <input type="checkbox" name="ingredient" value="<%= ing %>" checked>
-                    <%= ing %>
-                </label>
-                <% } %>
+            <div class="btn-group flex-wrap" role="group" aria-label="Ingrediente">
+                <% for (let ing of locals.ingrediente) { let id="btn-" + ing.replace(/\s+/g, "-" ).toLowerCase(); %>
+                    <input type="checkbox" class="btn-check" name="ingredient" value="<%= ing %>" id="<%= id %>"
+                        autocomplete="off" checked>
+                    <label class="btn btn-outline-primary m-1" for="<%= id %>">
+                        <%= ing %>
+                    </label>
+                    <% } %>
+            </div>
         </fieldset>
+
 
         <div class="form-check">
             <input class="form-check-input" type="checkbox" id="ignore-ingrediente" checked>
@@ -56,16 +63,16 @@
             </label>
         </div>
 
-        <div>Vegan:
-            <p><label>Da
-                    <input type="radio" name="gr_vegan" value="true" />
-                </label></p>
-            <p><label>Nu
-                    <input type="radio" name="gr_vegan" value="false" />
-                </label></p>
-            <p><label>Toate
-                    <input type="radio" name="gr_vegan" value="toate" checked />
-                </label></p>
+        <label class="form-label d-block">Vegan:</label>
+        <div class="btn-group" role="group" aria-label="Vegan">
+            <input type="radio" class="btn-check" name="gr_vegan" id="vegan-da" value="true">
+            <label class="btn btn-outline-success" for="vegan-da">Da</label>
+
+            <input type="radio" class="btn-check" name="gr_vegan" id="vegan-nu" value="false">
+            <label class="btn btn-outline-success" for="vegan-nu">Nu</label>
+
+            <input type="radio" class="btn-check" name="gr_vegan" id="vegan-toate" value="toate" checked>
+            <label class="btn btn-outline-success" for="vegan-toate">Toate</label>
         </div>
 
         <label for="inp-culoare">Culoare:</label>
@@ -88,14 +95,27 @@
             </select>
         </label>
 
-        <p>
-            <button id="filtrare">Filtreaza</button>
+        <div class="d-flex flex-wrap gap-2 my-3">
+            <button id="filtrare" class="btn btn-primary">
+                <i class="bi bi-funnel"></i>
+                <span class="d-none d-md-inline">Filtrează</span>
+            </button>
 
-            <button id="resetare">Reseteaza</button><br />
-            <button id="sortCrescNume">Sorteaza crescator dupa pret si nume</button>
-            <button id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button>
+            <button id="resetare" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-clockwise"></i>
+                <span class="d-none d-md-inline">Resetează</span>
+            </button>
 
-        </p>
+            <button id="sortCrescNume" class="btn btn-primary">
+                <i class="bi bi-sort-alpha-down"></i>
+                <span class="d-none d-md-inline">Sortează crescător</span>
+            </button>
+
+            <button id="sortDescrescNume" class="btn btn-primary">
+                <i class="bi bi-sort-alpha-up"></i>
+                <span class="d-none d-md-inline">Sortează descrescător</span>
+            </button>
+        </div>
 
         <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
 

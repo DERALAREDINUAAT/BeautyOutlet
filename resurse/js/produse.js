@@ -1,21 +1,21 @@
 window.onload = function () {
-    let temaSalvata = localStorage.getItem("tema");
-    if (temaSalvata) {
-        document.body.setAttribute("data-tema", temaSalvata);
-    } else {
-        document.body.setAttribute("data-tema", "light");
+    let switchTema = document.getElementById("switch-tema");
+    let iconTema = document.getElementById("icon-tema");
+
+    function aplicaTema(tema) {
+        document.body.setAttribute("data-tema", tema);
+        localStorage.setItem("tema", tema);
+        iconTema.className = tema === "dark" ? "bi bi-moon-fill" : "bi bi-sun-fill";
+        switchTema.checked = (tema === "dark");
     }
 
-    document.getElementById("btn-tema").onclick = function () {
-        let tema = document.body.getAttribute("data-tema");
-        if (tema === "dark") {
-            document.body.setAttribute("data-tema", "light");
-            localStorage.setItem("tema", "light");
-        } else {
-            document.body.setAttribute("data-tema", "dark");
-            localStorage.setItem("tema", "dark");
-        }
+    let temaSalvata = localStorage.getItem("tema") || "light";
+    aplicaTema(temaSalvata);
+
+    switchTema.onchange = function () {
+        aplicaTema(this.checked ? "dark" : "light");
     }
+
 
     btn = document.getElementById("filtrare");
     btn.onclick = function () {

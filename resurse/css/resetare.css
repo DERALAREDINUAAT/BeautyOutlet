@@ -1,0 +1,63 @@
+:root {
+    --font-size-base: 16px;
+    --spacing-unit: 1rem;
+    --main-color: #111;
+    --bold-weight: 700;
+    --italic-style: italic;
+    --list-style: square;
+    --table-border: 1px solid #ccc;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: var(--font-size-base);
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-size: var(--font-size-base); /* doar aici e permis px */
+}
+
+body {
+    line-height: 1.5;
+    color: var(--main-color);
+    padding: var(--spacing-unit);
+    font-family: 'Times New Roman', serif;
+}
+
+/* List-style și bullets */
+ul, ol {
+    list-style-type: var(--list-style);
+    padding-left: 2rem;
+}
+
+/* Bold și italic */
+strong, b {
+    font-weight: var(--bold-weight);
+}
+em, i {
+    font-style: var(--italic-style);
+}
+
+/* Table styling */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+th, td {
+    border: var(--table-border);
+    padding: 0.5rem;
+}

@@ -1,0 +1,6 @@
+ul.meniu li div.imag-icon {
+  display: none;
+}
+ul.meniu li div.text-icon {
+  display: block;
+}

@@ -1,28 +1,39 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("galerie-animata");
+window.addEventListener("load", async () => {
+  const container = document.querySelector(".galerie-animata");
   if (!container) return;
 
-  const imgs = container.querySelectorAll("img");
+  const raspuns = await fetch("/resurse/json/galerie.json");
+  const json = await raspuns.json();
+  const toatePozele = json.imagini;
+
+  let nrPoze = Math.floor(Math.random() * 4) * 2 + 5;
+  const pozeGalerie = toatePozele.slice(-nrPoze);
+
   let index = 0;
 
-  function arataImagine(i) {
-    imgs.forEach((img, j) => {
-      img.style.zIndex = j === i ? 1 : 0;
-      img.style.animation = j === i ? "galerieSlide 3s ease-in-out forwards" : "none";
-    });
+  function creeazaSlide(uri) {
+    const img = document.createElement("img");
+    img.src = `/resurse/imagini/galerie/${uri}`;
+    return img;
   }
 
-  arataImagine(index);
-  let interval = setInterval(() => {
-    index = (index + 1) % imgs.length;
-    arataImagine(index);
-  }, 4000);
+  function afiseazaUrmatoarea() {
+    container.innerHTML = "";
 
-  container.addEventListener("mouseenter", () => clearInterval(interval));
-  container.addEventListener("mouseleave", () => {
-    interval = setInterval(() => {
-      index = (index + 1) % imgs.length;
-      arataImagine(index);
-    }, 4000);
-  });
+    const urm = (index + 1) % pozeGalerie.length;
+
+    // fundalul = urmatoarea imagine
+    const imgFundal = creeazaSlide(pozeGalerie[urm].cale_imagine);
+    container.appendChild(imgFundal);
+
+    // imaginea animata deasupra
+    const imgCurenta = creeazaSlide(pozeGalerie[index].cale_imagine);
+    imgCurenta.classList.add("animata");
+    container.appendChild(imgCurenta);
+
+    index = urm;
+  }
+
+  afiseazaUrmatoarea();
+  setInterval(afiseazaUrmatoarea, 6000);
 });

@@ -21,6 +21,7 @@ window.onload = function () {
     btn.onclick = function () {
         //this.btn.classList.add("selectat");
         let inpNume = document.getElementById("inp-nume");
+        document.getElementById("inp-nume").placeholder = "ex: ruj mat, fard";
         let valNume = inpNume.value.trim().toLowerCase();
 
         if (!/^[a-zăâîșț\s]*$/i.test(valNume)) {
@@ -33,6 +34,19 @@ window.onload = function () {
         let inpPret = document.getElementById("inp-pret").value
         let inpCategorie = document.getElementById("inp-categorie").value.trim().toLowerCase();
         let produse = document.getElementsByClassName("produs")
+        let preturi = Array.from(produse).map(p =>
+            parseFloat(p.getElementsByClassName("val-pret")[0].textContent.trim())
+        );
+        let minPret = Math.min(...preturi);
+        let maxPret = Math.max(...preturi);
+
+        let inputRange = document.getElementById("inp-pret");
+        inputRange.min = minPret;
+        inputRange.max = maxPret;
+        inputRange.value = maxPret;
+
+        document.getElementById("infoRange").textContent = `(${maxPret})`;
+
         let vectRadio = document.getElementsByName("gr_vegan")
         let textarea = document.getElementById("inp-descriere");
         let cuvinteCheie = textarea.value.trim().toLowerCase().split(",");

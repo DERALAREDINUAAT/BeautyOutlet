@@ -1,0 +1,46 @@
+#galerie-animata {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border: 20px solid transparent;
+  border-image: url("../imagini/border.png") 30 round;
+  overflow: hidden;
+}
+#galerie-animata img {
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  animation: galerieAnim 5s infinite ease-in-out;
+  clip-path: circle(100% at 50% 50%);
+  opacity: 1;
+  transform: rotate(0deg);
+}
+#galerie-animata:hover img {
+  animation-play-state: paused;
+}
+@media screen and (max-width: 1000px) {
+  #galerie-animata {
+    display: none;
+  }
+}
+
+@keyframes galerieAnim {
+  0% {
+    clip-path: circle(100% at 50% 50%);
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    clip-path: circle(30% at 50% 50%);
+    transform: rotate(10deg);
+    opacity: 0.7;
+  }
+  100% {
+    clip-path: circle(0% at 50% 50%);
+    transform: rotate(360deg);
+    opacity: 0;
+  }
+}

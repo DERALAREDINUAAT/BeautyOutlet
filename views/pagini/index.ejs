@@ -12,18 +12,24 @@
     <meta name="author" content="Daria-Elena Răduț">
     <!-- Cerința 3: Configurarea favicon-urilor pentru diferite dispozitive -->
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/resurse/css/efecte.css" type="text/css">
     <%- include("../fragmente/head.ejs") %>
 </head>
 
 <body>
     <%- include("../fragmente/header.ejs") %>
         <main>
+            <section id="sectiune-bg" class="section-fix-bg bg1"></section>
             <div id="container-reflexie">
                 <div id="text">BeautyOutlet</div>
                 <div id="text-reflectat">BeautyOutlet</div>
             </div>
             <div id="grid-pagina">
                 <section id="welcome">
+                    <div class="text-animat-wrapper">
+                        <div class="text-animat">🎉 REDUCERI DE VARĂ LA TOATE PRODUSELE! 🎉</div>
+                    </div>
+
                     <!-- Cerința 5: Utilizarea tagurilor de secționare -->
                     <h2>Bine ai venit la BeautyOutlet!</h2>
                     <p>La <strong>BeautyOutlet</strong>, găsești <b>reduceri cosmetice</b> și <b>parfumuri celebre</b>
@@ -55,7 +61,6 @@
                             </div>
                         </div>
                     </div>
-
                     <section>
                         <h2>Promoții speciale</h2>
                         <p>Profită acum de cele mai bune <b>oferte speciale</b> la parfumuri și cosmetice! Vizitează
@@ -129,6 +134,55 @@
                         <figcaption>Harta interactivă a magazinului BeautyOutlet.</figcaption>
                     </figure>
                 </section>
+
+                <table class="responsive-table">
+                    <thead>
+                        <tr>
+                            <th>Produs</th>
+                            <th>Brand</th>
+                            <th>Utilizare</th>
+                            <th>Reacție client supărat</th>
+                            <th>Reacție client fericit</th>
+                            <th>Reacție influencer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Produs">Fond de ten</td>
+                            <td data-label="Brand">L'Oréal</td>
+                            <td data-label="Utilizare">Ten uniformizat</td>
+                            <td data-label="Reacție client supărat">„Mi s-a oxidat pe față 😡”</td>
+                            <td data-label="Reacție client fericit">„Arăt ca un filtru Instagram 🤩”</td>
+                            <td data-label="Reacție influencer">„Wow, full coverage!”</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Produs">Rimel</td>
+                            <td data-label="Brand">Maybelline</td>
+                            <td data-label="Utilizare">Gene voluminoase</td>
+                            <td data-label="Reacție client supărat">„Mi-a curs tot la plajă 😭”</td>
+                            <td data-label="Reacție client fericit">„Am gene de păpușă 😍”</td>
+                            <td data-label="Reacție influencer">„It's giving drama queen 👑”</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Produs">Parfum</td>
+                            <td data-label="Brand">Dior</td>
+                            <td data-label="Utilizare">Arome de seară</td>
+                            <td data-label="Reacție client supărat">„Dispare după 2 ore...”</td>
+                            <td data-label="Reacție client fericit">„Toată lumea mă întreabă cu ce m-am dat!”</td>
+                            <td data-label="Reacție influencer">„Luxury in a bottle 💎”</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Produs">Ruj mat</td>
+                            <td data-label="Brand">Sephora</td>
+                            <td data-label="Utilizare">Rezistență îndelungată</td>
+                            <td data-label="Reacție client supărat">„Mi-a uscat buzele 🥲”</td>
+                            <td data-label="Reacție client fericit">„Nu s-a luat nici după o shaorma!”</td>
+                            <td data-label="Reacție influencer">„Transfer-proof, testat cu pupici 💋”</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
                 <section id="produse">
                     <h2>Produsele noastre</h2>
 
@@ -394,6 +448,14 @@
                     <span class="linie"></span>
                     <span class="capat-dreapta" data-reflexie="☽">☽</span>
                 </div>
+
+                <div id="galerie-animata">
+                    <% for(let img of galerieAnimata) { %>
+                        <img src="/<%= obGlobal.obImagini.cale_galerie %>/<%= img.cale_imagine %>"
+                            alt="Imagine galerie">
+                        <% } %>
+                </div>
+
 
         </main>
         <%- include("../fragmente/footer.ejs") %>

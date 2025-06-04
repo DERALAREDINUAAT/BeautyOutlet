@@ -108,6 +108,11 @@ function compileazaScss(caleScss, caleCss) {
     rez = sass.compile(caleScss, { "sourceMap": true });
     fs.writeFileSync(caleCss, rez.css)
     // console.log("Compilare SCSS",rez);
+    let timestamp = Date.now();
+    let numeBackup = `${numeFisCss}_${timestamp}.css`;
+    let caleBackupFinala = path.join(caleBackup, numeBackup);
+    fs.writeFileSync(caleBackupFinala, rez.css);
+    console.log("Backup salvat:", caleBackupFinala);
 }
 //compileazaScss("a.scss");
 
@@ -212,9 +217,9 @@ app.get("/despre", function (req, res) {
     res.render("pagini/despre");
 })
 
-app.get(["/", "/index", "/home"], function (req, res) {
-    res.render("pagini/index", { ip: req.ip, imagini: obGlobal.obImagini.imagini });
-})
+//app.get(["/", "/index", "/home"], function (req, res) {
+  //  res.render("pagini/index", { ip: req.ip, imagini: obGlobal.obImagini.imagini });
+//})
 
 app.get("/despre", function (req, res) {
     res.render("pagini/despre");
@@ -455,7 +460,17 @@ app.get("/", async (req, res) => {
     const ora = new Date().getHours();
     const imaginiAfisate = filtreazaImagini(ora);
     await genereaza();
-    res.render("pagini/index", { imagini: imaginiAfisate });
+    let galerieJson = fs.readFileSync(path.join(__dirname, "resurse/json/galerie.json"));
+    let obGalerie = JSON.parse(galerieJson);
+    let total = obGalerie.imagini.length;
+
+    let n = Math.floor(Math.random() * 4) * 2 + 5; // 5, 7, 9, 11
+    let galeriiSelectate = obGalerie.imagini.slice(-n);
+
+    res.render("pagini/index", {
+        imagini: imaginiAfisate,
+        galerieAnimata: galeriiSelectate,
+        obGlobal: obGlobal})
 });
 
 app.get("/galerie", async (req, res) => {

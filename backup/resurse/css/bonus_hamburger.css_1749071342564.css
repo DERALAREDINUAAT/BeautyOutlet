@@ -1,0 +1,55 @@
+.hamburger {
+  position: relative;
+  width: 30px;
+  height: calc(3 * 4px + 2 * 5px);
+  cursor: pointer;
+  z-index: 1001;
+}
+.hamburger span {
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background-color: #333;
+  left: 0;
+  transition: all 0.4s ease-in-out;
+  opacity: 1;
+}
+.hamburger span:nth-child(1) {
+  top: 0px;
+}
+.hamburger span:nth-child(2) {
+  top: 9px;
+}
+.hamburger span:nth-child(3) {
+  top: 18px;
+}
+.hamburger.active span {
+  animation: animatie-hamburger 0.8s forwards;
+}
+.hamburger.active span:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.hamburger.active span:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.hamburger.active span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes animatie-hamburger {
+  0% {
+    background-color: #333;
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    background-color: #e91e63;
+    transform: translateX(5px) rotate(20deg);
+    opacity: 0.5;
+  }
+  100% {
+    background-color: #ff69b4;
+    transform: translateX(-5px) rotate(-20deg);
+    opacity: 0.8;
+  }
+}

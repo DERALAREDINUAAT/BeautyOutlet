@@ -1,0 +1,57 @@
+$bar-color: #333;
+$bar-width: 30px;
+$bar-height: 4px;
+$bar-spacing: 5px;
+$t: 0.2s;
+
+.hamburger {
+  position: relative;
+  width: $bar-width;
+  height: calc(3 * #{$bar-height} + 2 * #{$bar-spacing});
+  cursor: pointer;
+  z-index: 1001;
+
+  span {
+    position: absolute;
+    height: $bar-height;
+    width: 100%;
+    background-color: $bar-color;
+    left: 0;
+    transition: all 0.4s ease-in-out;
+    opacity: 1;
+
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        top: ($i - 1) * ($bar-height + $bar-spacing);
+      }
+    }
+  }
+
+  &.active span {
+    animation: animatie-hamburger 0.8s forwards;
+
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        animation-delay: $i * $t;
+      }
+    }
+  }
+}
+
+@keyframes animatie-hamburger {
+  0% {
+    background-color: #333;
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    background-color: #e91e63;
+    transform: translateX(5px) rotate(20deg);
+    opacity: 0.5;
+  }
+  100% {
+    background-color: #ff69b4;
+    transform: translateX(-5px) rotate(-20deg);
+    opacity: 0.8;
+  }
+}

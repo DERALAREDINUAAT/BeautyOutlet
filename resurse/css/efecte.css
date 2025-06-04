@@ -1,0 +1,55 @@
+/*Scrierea textului pe coloane*/
+#produse {
+  column-count: 2;
+  column-gap: 3rem;
+  column-rule: 2px solid var(--culoare-text);
+}
+
+@media screen and (max-width: 800px) {
+  #produse {
+    column-count: 1;
+    column-rule: none;
+  }
+}
+
+/*text care se plimba orizontal sau vertical printr-o animație*/
+.text-animat-wrapper {
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--culoare-deschisa); /* opțional, pt contrast */
+}
+
+.text-animat {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-horizontal 10s linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/*background fix la scroll*/
+body.bg1 {
+  background-image: url('/resurse/imagini/bg1.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease-in-out;
+}
+
+body.bg2 {
+  background-image: url('/resurse/imagini/bg2.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease-in-out;
+}
+

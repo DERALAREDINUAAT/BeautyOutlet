@@ -21,7 +21,7 @@ window.onload = function () {
     btn.onclick = function () {
         //this.btn.classList.add("selectat");
         let inpNume = document.getElementById("inp-nume");
-        document.getElementById("inp-nume").placeholder = "ex: ruj mat, fard";
+        document.getElementById("inp-nume").placeholder = "ex: " + produse[0].nume.toLowerCase();
         let valNume = inpNume.value.trim().toLowerCase();
 
         if (!/^[a-zăâîșț\s]*$/i.test(valNume)) {
@@ -49,6 +49,7 @@ window.onload = function () {
 
         let vectRadio = document.getElementsByName("gr_vegan")
         let textarea = document.getElementById("inp-descriere");
+        document.getElementById("inp-descriere").placeholder = "ex: " + produse[0].descriere.toLowerCase().split(" ").slice(0, 3).join(" ");
         let cuvinteCheie = textarea.value.trim().toLowerCase().split(",");
         cuvinteCheie = cuvinteCheie.map(c => c.trim()).filter(c => c.length > 0);
         if (textarea.value.trim().length > 0 && cuvinteCheie.length == 0) {

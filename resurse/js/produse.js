@@ -1,24 +1,24 @@
 window.onload = function () {
-    let switchTema = document.getElementById("switch-tema");
-    let iconTema = document.getElementById("icon-tema");
+    let selectTema = document.getElementById("select-tema");
 
     function aplicaTema(tema) {
         document.body.setAttribute("data-tema", tema);
         localStorage.setItem("tema", tema);
-        iconTema.className = tema === "dark" ? "bi bi-moon-fill" : "bi bi-sun-fill";
-        switchTema.checked = (tema === "dark");
+        if (selectTema) selectTema.value = tema;
     }
 
     let temaSalvata = localStorage.getItem("tema") || "light";
     aplicaTema(temaSalvata);
 
-    switchTema.onchange = function () {
-        aplicaTema(this.checked ? "dark" : "light");
+    if (selectTema) {
+        selectTema.onchange = function () {
+            aplicaTema(this.value);
+        };
     }
 
-
     btn = document.getElementById("filtrare");
-    btn.onclick = function () {
+    btn.onclick = aplicaFiltrare;
+    function aplicaFiltrare(event) {
         //this.btn.classList.add("selectat");
         let inpNume = document.getElementById("inp-nume");
         let valNume = inpNume.value.trim().toLowerCase();
@@ -53,7 +53,7 @@ window.onload = function () {
                 ingredienteSelectate.push(ch.value.toLowerCase());
             }
         }
-        let aplicaFiltruIngrediente = document.getElementById("aplica-ingrediente").checked;
+        let aplicaFiltruIngrediente = ingredienteSelectate.length > 0;
 
         let valVegan = "toate";
         for (let red of vectRadio) {
@@ -93,8 +93,8 @@ window.onload = function () {
             let cond5 = cuvinteCheie.length == 0 || cuvinteCheie.some(cuv => descriere.includes(cuv));
 
             let ingredienteRaw = prod.getElementsByClassName("val-ingrediente")[0].innerHTML.trim().toLowerCase();
-            let ingredienteProdus = ingredienteRaw ? ingredienteRaw.split(",").map(i => i.trim()) : [];
-            let cond6 = !aplicaFiltruIngrediente || ingredienteSelectate.length == 0 || ingredienteProdus.some(i => ingredienteSelectate.includes(i));
+let ingredienteProdus = ingredienteRaw ? ingredienteRaw.split(",").map(i => i.trim()) : [];
+let cond6 = ingredienteSelectate.length === 0 || ingredienteProdus.some(i => ingredienteSelectate.includes(i));
 
             let tipProdus = prod.getElementsByClassName("val-tip")[0].innerHTML.trim().toLowerCase();
             let cond7 = valoriTip.length === 0 || valoriTip.includes(tipProdus);
@@ -134,7 +134,6 @@ window.onload = function () {
         // Reset ingrediente
         let checkboxes = document.getElementsByName("ingredient");
         for (let ch of checkboxes) ch.checked = false;
-        document.getElementById("ignore-ingrediente").checked = false;
 
         // Reset select multiplu
         let tipuri = document.getElementById("inp-tip").options;
@@ -208,4 +207,18 @@ window.onload = function () {
             }
         }
     }
+
+    document.getElementById("inp-nume").oninput = aplicaFiltrare;
+    document.getElementById("inp-descriere").oninput = aplicaFiltrare;
+    document.getElementById("inp-pret").oninput = aplicaFiltrare;
+    document.getElementById("inp-categorie").onchange = aplicaFiltrare;
+
+    let radioVegan = document.getElementsByName("gr_vegan");
+    for (let r of radioVegan) r.onchange = aplicaFiltrare;
+
+    let ingrediente = document.getElementsByName("ingredient");
+    for (let ch of ingrediente) ch.onchange = aplicaFiltrare;
+
+    document.getElementById("inp-tip").onchange = aplicaFiltrare;
+    document.getElementById("inp-culoare").onchange = aplicaFiltrare;
 }

@@ -19,12 +19,12 @@
     <header class="c1" id="titlu">
         <title>BeautyOutlet - Reduceri Cosmetice & Parfumuri</title>
         <%- include("../fragmente/header") %>
-            <div class="form-check form-switch d-flex align-items-center ms-2">
-                <input class="form-check-input" type="checkbox" id="switch-tema">
-                <label class="form-check-label ms-2" for="switch-tema">
-                    <i id="icon-tema" class="bi"></i>
-                </label>
-            </div>
+            <label for="select-tema" class="form-label">Alege tema:</label>
+<select class="form-select" id="select-tema">
+  <option value="light">Light</option>
+  <option value="dark">Dark</option>
+  <option value="blue">Blue</option>
+</select>
     </header>
     <div class="video-background">
         <video autoplay muted loop playsinline>
@@ -59,12 +59,6 @@
                     <% } %>
             </div>
         </fieldset>
-
-
-        <div class="form-check">
-            <input type="checkbox" id="aplica-ingrediente">
-            <label for="aplica-ingrediente">Aplică filtrul pe ingrediente</label>
-        </div>
 
         <label class="form-label d-block">Vegan:</label>
         <div class="btn-group" role="group" aria-label="Vegan">
@@ -142,8 +136,7 @@
                                 </time>
                             </p>
                             <p class="vegan">Vegan: <span class="val-vegan"><%- prod.vegan %></span></p>
-                            <p class="val-ingrediente">
-                                <%= prod.ingrediente ? prod.ingrediente.join(", ") : "" %></p>
+                            <p>Ingrediente: <span class="val-ingrediente"><%= prod.ingrediente ? prod.ingrediente.join(", ") : "" %></span></p>
                         </div>
                         <figure>
                             <a href=" /produs/<%-prod.id %>"><img src="/resurse/imagini/produse/<%- prod.imagine %>"

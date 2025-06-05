@@ -26,12 +26,12 @@
                 </label>
             </div>
     </header>
-<div class="video-background">
-            <video autoplay muted loop playsinline>
-                <source src="/resurse/video/bg-video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
+    <div class="video-background">
+        <video autoplay muted loop playsinline>
+            <source src="/resurse/video/bg-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
     <main>
         <label> Nume: <input type="text" id="inp-nume"></label>
         <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
@@ -62,10 +62,8 @@
 
 
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="ignore-ingrediente" checked>
-            <label class="form-check-label" for="ignore-ingrediente">
-                Aplică filtrul pe ingrediente
-            </label>
+            <input type="checkbox" id="aplica-ingrediente">
+            <label for="aplica-ingrediente">Aplică filtrul pe ingrediente</label>
         </div>
 
         <label class="form-label d-block">Vegan:</label>
@@ -124,10 +122,12 @@
 
         <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
 
+        <p id="nr-produse">Toate produsele afișate</p>
+
         <section id="produse">
 
             <h2>Produse</h2>
-            <div class="grid-produse">
+            <div id="container-produse" class="grid-produse">
                 <% for( let prod of locals.produse) { %>
                     <article class="produs <%= prod.categorie.replace(/\s/g, '') %>" id="ent<%= prod.id %>">
                         <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%-
@@ -142,26 +142,27 @@
                                 </time>
                             </p>
                             <p class="vegan">Vegan: <span class="val-vegan"><%- prod.vegan %></span></p>
+                            <p class="val-ingrediente">
+                                <%= prod.ingrediente ? prod.ingrediente.join(", ") : "" %></p>
                         </div>
                         <figure>
-                            <a href="/produs/<%-prod.id %>"><img src="/resurse/imagini/produse/<%- prod.imagine %>"
-                                    style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
-                        </figure>
-                        <p class="val-descriere"><%- prod.descriere %></p>
-                        <p class="val-ingrediente">
-                            <%= prod.ingrediente ? prod.ingrediente.join(", ") : "" %></p>
-                        <p class=" categorie">Categorie: <span class="val-categorie"><%- prod.categorie%></span>
-                                <p class="tip">Tip produs: <span class="val-tip">
-                                        <%= prod.tip_produs %>
-                                    </span></p>
-                                <p class="culoare">Culoare: <span class="val-culoare">
-                                        <%= prod.culoare || "nespecificat" %>
-                                    </span></p>
-                        </p>
-                        <label class="selecteaza-cos">
-                            Selectează:<br />
-                            <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-                        </label>
+                            <a href=" /produs/<%-prod.id %>"><img src="/resurse/imagini/produse/<%- prod.imagine %>"
+                                        style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
+                                    </figure>
+                                    <p class="val-descriere"><%- prod.descriere %></p>
+                                    <p class=" categorie">Categorie: <span class="val-categorie"><%-
+                                                prod.categorie%></span>
+                                    <p class="tip">Tip produs: <span class="val-tip">
+                                            <%= prod.tip_produs %>
+                                        </span></p>
+                                    <p class="culoare">Culoare: <span class="val-culoare">
+                                            <%= prod.culoare || "nespecificat" %>
+                                        </span></p>
+                            </p>
+                            <label class="selecteaza-cos">
+                                Selectează:<br />
+                                <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
+                            </label>
                     </article>
                     <% }%>
             </div>

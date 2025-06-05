@@ -85,3 +85,10 @@ main{
     background-color: yellow;
     font-weight: bold;
 }
+
+.msg-gol {
+  font-style: italic;
+  color: crimson;
+  text-align: center;
+  padding: 1em;
+}

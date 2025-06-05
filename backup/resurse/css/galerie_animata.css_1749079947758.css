@@ -1,0 +1,49 @@
+.galerie-animata {
+  width: 100%;
+  margin: 50px auto;
+  border: 30px solid;
+  border-image: url("/resurse/imagini/diverse/border.jpg") 30 round;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 400px;
+  background-color: white;
+}
+
+.galerie-animata img {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  animation: animatieGalerie 6s infinite ease-in-out;
+  clip-path: circle(100%);
+  opacity: 0;
+}
+
+.galerie-animata:hover img {
+  animation-play-state: paused;
+}
+
+@keyframes animatieGalerie {
+  0% {
+    clip-path: circle(100%);
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+  50% {
+    clip-path: circle(40%);
+    opacity: 0.5;
+    transform: rotate(20deg);
+  }
+  100% {
+    clip-path: circle(0%);
+    opacity: 0;
+    transform: rotate(45deg);
+  }
+}
+@media (max-width: 1000px) {
+  .galerie-animata {
+    display: none;
+  }
+}

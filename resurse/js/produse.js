@@ -21,7 +21,6 @@ window.onload = function () {
     btn.onclick = function () {
         //this.btn.classList.add("selectat");
         let inpNume = document.getElementById("inp-nume");
-        document.getElementById("inp-nume").placeholder = "ex: " + produse[0].nume.toLowerCase();
         let valNume = inpNume.value.trim().toLowerCase();
 
         if (!/^[a-zăâîșț\s]*$/i.test(valNume)) {
@@ -34,22 +33,9 @@ window.onload = function () {
         let inpPret = document.getElementById("inp-pret").value
         let inpCategorie = document.getElementById("inp-categorie").value.trim().toLowerCase();
         let produse = document.getElementsByClassName("produs")
-        let preturi = Array.from(produse).map(p =>
-            parseFloat(p.getElementsByClassName("val-pret")[0].textContent.trim())
-        );
-        let minPret = Math.min(...preturi);
-        let maxPret = Math.max(...preturi);
-
-        let inputRange = document.getElementById("inp-pret");
-        inputRange.min = minPret;
-        inputRange.max = maxPret;
-        inputRange.value = maxPret;
-
-        document.getElementById("infoRange").textContent = `(${maxPret})`;
 
         let vectRadio = document.getElementsByName("gr_vegan")
         let textarea = document.getElementById("inp-descriere");
-        document.getElementById("inp-descriere").placeholder = "ex: " + produse[0].descriere.toLowerCase().split(" ").slice(0, 3).join(" ");
         let cuvinteCheie = textarea.value.trim().toLowerCase().split(",");
         cuvinteCheie = cuvinteCheie.map(c => c.trim()).filter(c => c.length > 0);
         if (textarea.value.trim().length > 0 && cuvinteCheie.length == 0) {
@@ -67,7 +53,7 @@ window.onload = function () {
                 ingredienteSelectate.push(ch.value.toLowerCase());
             }
         }
-        let aplicaFiltruIngrediente = document.getElementById("ignore-ingrediente").checked;
+        let aplicaFiltruIngrediente = document.getElementById("aplica-ingrediente").checked;
 
         let valVegan = "toate";
         for (let red of vectRadio) {
@@ -83,7 +69,9 @@ window.onload = function () {
         let valoriTip = Array.from(selectTip.selectedOptions).map(opt => opt.value);
         let selectCuloare = document.getElementById("inp-culoare");
         let valoriCulori = Array.from(selectCuloare.selectedOptions).map(opt => opt.value);
+        let container = document.getElementById("container-produse");
 
+        let produseAfisate = [];
 
         for (let prod of produse) {
             prod.style.display = "none";
@@ -116,9 +104,15 @@ window.onload = function () {
 
             if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7 && cond8) {
                 prod.style.display = "block";
+                produseAfisate.push(prod);
             }
         }
+        if (produseAfisate.length === 0) {
+            container.innerHTML = "<p class='msg-gol'>Nu există produse conform filtrării curente.</p>";
+        }
+        document.getElementById("nr-produse").textContent = `${produseAfisate.length} produse afișate`;
     }
+
 
 
     document.getElementById("inp-pret").onchange = function () {
@@ -131,15 +125,30 @@ window.onload = function () {
         }
         document.getElementById("inp-nume").value = ""
         document.getElementById("inp-descriere").value = "";
+        document.getElementById("inp-pret").value = document.getElementById("inp-pret").min;
+        document.getElementById("infoRange").innerHTML = `(${document.getElementById("inp-pret").value})`;
+        document.getElementById("inp-categorie").value = "toate";
 
+        document.getElementById("vegan-toate").checked = true;
 
+        // Reset ingrediente
+        let checkboxes = document.getElementsByName("ingredient");
+        for (let ch of checkboxes) ch.checked = false;
+        document.getElementById("ignore-ingrediente").checked = false;
+
+        // Reset select multiplu
+        let tipuri = document.getElementById("inp-tip").options;
+        for (let opt of tipuri) opt.selected = false;
+        let culori = document.getElementById("inp-culoare").options;
+        for (let opt of culori) opt.selected = false;
 
         let produse = document.getElementsByClassName("produs")
 
-        document.getElementById("i_rad4").checked = true;
-
         for (let prod of produse) {
             prod.style.display = "block";
+
+            document.getElementById("nr-produse").textContent = `${produse.length} produse afișate`;
+            document.getElementById("container-produse").querySelector(".msg-gol")?.remove();
         }
     }
     document.getElementById("sortCrescNume").onclick = function () {

@@ -9,13 +9,3 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  const sectiune = document.getElementById("sectiune-bg");
-  let toggle = true;
-
-  setInterval(() => {
-    sectiune.classList.toggle("bg1", toggle);
-    sectiune.classList.toggle("bg2", !toggle);
-    toggle = !toggle;
-  }, 5000); // schimbă la fiecare 5 secunde
-});
